@@ -1,19 +1,13 @@
 import { MouseEvent, useRef, useState } from "react";
-import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
-export default function SelectOrganization(props: PageProps<Extract<KcContext, { pageId: "select-organization.ftl" }>, I18n>) {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
-
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
-
+export default function SelectOrganization(
+    props: PageProps<Extract<KcContext, { pageId: "select-organization.ftl" }>, I18n>
+) {
+    const { kcContext, i18n, Template, classes } = props;
     const { url, user } = kcContext;
-
     const { msg } = i18n;
 
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -42,25 +36,42 @@ export default function SelectOrganization(props: PageProps<Extract<KcContext, {
     const shouldDisplayGrid = organizations.length > 3;
 
     return (
-        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={null}>
-            <form ref={formRef} action={url.loginAction} className="form-vertical" method="post">
-                <div id="kc-user-organizations" className={kcClsx("kcFormGroupClass")}>
-                    <h2>{msg("organization.select")}</h2>
-                    <ul className={kcClsx("kcFormSocialAccountListClass", shouldDisplayGrid && "kcFormSocialAccountListGridClass")}>
+        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} classes={classes} headerNode={null}>
+            <form ref={formRef} action={url.loginAction} method="post">
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                    <h2 style={{ color: "rgba(255,255,255,0.7)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0, fontWeight: 400 }}>
+                        {msg("organization.select")}
+                    </h2>
+                    <div style={{
+                        display: shouldDisplayGrid ? "grid" : "flex",
+                        gridTemplateColumns: shouldDisplayGrid ? "repeat(2, 1fr)" : undefined,
+                        flexDirection: shouldDisplayGrid ? undefined : "column",
+                        gap: "10px",
+                    }}>
                         {organizations.map(({ alias, name }) => (
-                            <li key={alias}>
-                                <button
-                                    id={`organization-${alias}`}
-                                    className={kcClsx("kcFormSocialAccountListButtonClass", shouldDisplayGrid && "kcFormSocialAccountGridItem")}
-                                    type="button"
-                                    onClick={onOrganizationClick(alias)}
-                                    disabled={isSubmitting}
-                                >
-                                    <span className={kcClsx("kcFormSocialAccountNameClass")}>{name ?? alias}</span>
-                                </button>
-                            </li>
+                            <button
+                                key={alias}
+                                id={`organization-${alias}`}
+                                type="button"
+                                onClick={onOrganizationClick(alias)}
+                                disabled={isSubmitting}
+                                style={{
+                                    padding: "12px 16px",
+                                    backgroundColor: "#27242E",
+                                    border: "1px solid #34343B",
+                                    borderRadius: "6px",
+                                    color: "#ffffff",
+                                    fontSize: "14px",
+                                    fontFamily: "'Geist', 'Open Sans', sans-serif",
+                                    cursor: isSubmitting ? "not-allowed" : "pointer",
+                                    opacity: isSubmitting ? 0.6 : 1,
+                                    textAlign: "center",
+                                }}
+                            >
+                                {name ?? alias}
+                            </button>
                         ))}
-                    </ul>
+                    </div>
                 </div>
                 <input ref={organizationInputRef} type="hidden" name="kc.org" />
             </form>
