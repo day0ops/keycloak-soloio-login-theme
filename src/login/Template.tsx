@@ -3,6 +3,7 @@ import type { TemplateProps } from "keycloakify/login/TemplateProps";
 import type { KcContext } from "../kc.gen";
 import type { I18n } from "../i18n";
 import backgroundImage from "./assets/background.png";
+import faviconUrl from "./assets/favicon.png";
 
 export default function Template(props: TemplateProps<KcContext, I18n>) {
     const { kcContext, i18n, children } = props;
@@ -15,6 +16,12 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
     useEffect(() => {
         document.title = msgStr("loginTitle", kcContext.realm.displayName ?? kcContext.realm.name);
+
+        const favicon = document.createElement("link");
+        favicon.rel = "icon";
+        favicon.type = "image/png";
+        favicon.href = faviconUrl;
+        document.head.appendChild(favicon);
 
         const link = document.createElement("link");
         link.rel = "stylesheet";
