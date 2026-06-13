@@ -1,75 +1,94 @@
-import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
-export default function LoginRecoveryAuthnCodeInput(props: PageProps<Extract<KcContext, { pageId: "login-recovery-authn-code-input.ftl" }>, I18n>) {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+const inputStyle: React.CSSProperties = {
+    width: "100%",
+    padding: "10px 14px",
+    backgroundColor: "#27242E",
+    border: "1px solid #34343B",
+    borderRadius: "6px",
+    color: "#ffffff",
+    fontSize: "14px",
+    fontFamily: "'Geist', 'Open Sans', sans-serif",
+    outline: "none",
+    boxSizing: "border-box",
+    letterSpacing: "0.12em",
+};
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
+const labelStyle: React.CSSProperties = {
+    display: "block",
+    color: "rgba(255,255,255,0.7)",
+    fontSize: "13px",
+    marginBottom: "6px",
+    fontFamily: "'Geist', 'Open Sans', sans-serif",
+};
 
+export default function LoginRecoveryAuthnCodeInput(
+    props: PageProps<Extract<KcContext, { pageId: "login-recovery-authn-code-input.ftl" }>, I18n>
+) {
+    const { kcContext, i18n, Template, classes } = props;
     const { url, messagesPerField, recoveryAuthnCodesInputBean } = kcContext;
-
     const { msg, msgStr } = i18n;
+
+    const hasError = messagesPerField.existsError("recoveryCodeInput");
 
     return (
         <Template
             kcContext={kcContext}
             i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
+            doUseDefaultCss={false}
             classes={classes}
             headerNode={msg("auth-recovery-code-header")}
-            displayMessage={!messagesPerField.existsError("recoveryCodeInput")}
+            displayMessage={!hasError}
         >
-            <form id="kc-recovery-code-login-form" className={kcClsx("kcFormClass")} action={url.loginAction} method="post">
-                <div className={kcClsx("kcFormGroupClass")}>
-                    <div className={kcClsx("kcLabelWrapperClass")}>
-                        <label htmlFor="recoveryCodeInput" className={kcClsx("kcLabelClass")}>
-                            {msg("auth-recovery-code-prompt", `${recoveryAuthnCodesInputBean.codeNumber}`)}
-                        </label>
-                    </div>
-                    <div className={kcClsx("kcInputWrapperClass")}>
-                        <input
-                            tabIndex={1}
-                            id="recoveryCodeInput"
-                            name="recoveryCodeInput"
-                            aria-invalid={messagesPerField.existsError("recoveryCodeInput")}
-                            autoComplete="off"
-                            type="text"
-                            className={kcClsx("kcInputClass")}
-                            autoFocus
+            <form
+                id="kc-recovery-code-login-form"
+                action={url.loginAction}
+                method="post"
+                style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+            >
+                <div>
+                    <label htmlFor="recoveryCodeInput" style={labelStyle}>
+                        {msg("auth-recovery-code-prompt", `${recoveryAuthnCodesInputBean.codeNumber}`)}
+                    </label>
+                    <input
+                        tabIndex={1}
+                        id="recoveryCodeInput"
+                        name="recoveryCodeInput"
+                        autoComplete="off"
+                        type="text"
+                        autoFocus
+                        aria-invalid={hasError}
+                        style={hasError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)" } : inputStyle}
+                    />
+                    {hasError && (
+                        <span
+                            style={{ color: "#ff6b7a", fontSize: "12px", marginTop: "4px", display: "block" }}
+                            aria-live="polite"
+                            dangerouslySetInnerHTML={{ __html: kcSanitize(messagesPerField.get("recoveryCodeInput")) }}
                         />
-                        {messagesPerField.existsError("recoveryCodeInput") && (
-                            <span
-                                id="input-error"
-                                className={kcClsx("kcInputErrorMessageClass")}
-                                aria-live="polite"
-                                dangerouslySetInnerHTML={{
-                                    __html: kcSanitize(messagesPerField.get("recoveryCodeInput"))
-                                }}
-                            />
-                        )}
-                    </div>
+                    )}
                 </div>
-
-                <div className={kcClsx("kcFormGroupClass")}>
-                    <div id="kc-form-options" className={kcClsx("kcFormOptionsWrapperClass")}>
-                        <div className={kcClsx("kcFormOptionsWrapperClass")} />
-                    </div>
-                    <div id="kc-form-buttons" className={kcClsx("kcFormButtonsClass")}>
-                        <input
-                            className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
-                            name="login"
-                            id="kc-login"
-                            type="submit"
-                            value={msgStr("doLogIn")}
-                        />
-                    </div>
-                </div>
+                <button
+                    name="login"
+                    type="submit"
+                    style={{
+                        width: "100%",
+                        padding: "11px",
+                        background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                        color: "#ffffff",
+                        border: "none",
+                        borderRadius: "6px",
+                        fontSize: "14px",
+                        fontWeight: 600,
+                        fontFamily: "'Geist', 'Open Sans', sans-serif",
+                        cursor: "pointer",
+                    }}
+                >
+                    {msgStr("doLogIn")}
+                </button>
             </form>
         </Template>
     );

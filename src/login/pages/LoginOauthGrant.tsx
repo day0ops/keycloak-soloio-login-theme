@@ -1,101 +1,124 @@
-import { getKcClsx } from "keycloakify/login/lib/kcClsx";
-import { PageProps } from "keycloakify/login/pages/PageProps";
-import { KcContext } from "../KcContext";
+import type { PageProps } from "keycloakify/login/pages/PageProps";
+import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
-export default function LoginOauthGrant(props: PageProps<Extract<KcContext, { pageId: "login-oauth-grant.ftl" }>, I18n>) {
-    const { kcContext, i18n, doUseDefaultCss, classes, Template } = props;
+export default function LoginOauthGrant(
+    props: PageProps<Extract<KcContext, { pageId: "login-oauth-grant.ftl" }>, I18n>
+) {
+    const { kcContext, i18n, Template, classes } = props;
     const { url, oauth, client } = kcContext;
-
     const { msg, msgStr, advancedMsg, advancedMsgStr } = i18n;
-
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
 
     return (
         <Template
             kcContext={kcContext}
             i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
+            doUseDefaultCss={false}
             classes={classes}
-            bodyClassName="oauth"
             headerNode={
-                <>
-                    {client.attributes.logoUri && <img src={client.attributes.logoUri} />}
-                    <p>{client.name ? msg("oauthGrantTitle", advancedMsgStr(client.name)) : msg("oauthGrantTitle", client.clientId)}</p>
-                </>
+                <span style={{ fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                    {client.name ? msg("oauthGrantTitle", advancedMsgStr(client.name)) : msg("oauthGrantTitle", client.clientId)}
+                </span>
             }
         >
-            <div id="kc-oauth" className="content-area">
-                <h3>{msg("oauthGrantRequest")}</h3>
-                <ul>
-                    {oauth.clientScopesRequested.map(clientScope => (
-                        <li key={clientScope.consentScreenText}>
-                            <span>
-                                {advancedMsg(clientScope.consentScreenText)}
-                                {clientScope.dynamicScopeParameter && (
-                                    <>
-                                        : <b>{clientScope.dynamicScopeParameter}</b>
-                                    </>
-                                )}
-                            </span>
-                        </li>
-                    ))}
-                </ul>
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                {client.attributes.logoUri && (
+                    <img src={client.attributes.logoUri} alt={client.name ?? client.clientId} style={{ maxHeight: "48px", objectFit: "contain" }} />
+                )}
 
-                {client.attributes.policyUri ||
-                    (client.attributes.tosUri && (
-                        <h3>
-                            {client.name ? msg("oauthGrantInformation", advancedMsgStr(client.name)) : msg("oauthGrantInformation", client.clientId)}
-                            {client.attributes.tosUri && (
-                                <>
-                                    {msg("oauthGrantReview")}
-                                    <a href={client.attributes.tosUri} target="_blank">
-                                        {msg("oauthGrantTos")}
-                                    </a>
-                                </>
-                            )}
-                            {client.attributes.policyUri && (
-                                <>
-                                    {msg("oauthGrantReview")}
-                                    <a href={client.attributes.policyUri} target="_blank">
-                                        {msg("oauthGrantPolicy")}
-                                    </a>
-                                </>
-                            )}
-                        </h3>
-                    ))}
+                <div>
+                    <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: "0 0 10px" }}>
+                        {msg("oauthGrantRequest")}
+                    </p>
+                    <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "6px" }}>
+                        {oauth.clientScopesRequested.map(clientScope => (
+                            <li
+                                key={clientScope.consentScreenText}
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "8px",
+                                    color: "rgba(255,255,255,0.8)",
+                                    fontSize: "13px",
+                                    fontFamily: "'Geist', 'Open Sans', sans-serif",
+                                    padding: "8px 12px",
+                                    backgroundColor: "rgba(255,255,255,0.04)",
+                                    borderRadius: "4px",
+                                }}
+                            >
+                                <span style={{ color: "#6844FF", fontSize: "16px", lineHeight: 1 }}>✓</span>
+                                <span>
+                                    {advancedMsg(clientScope.consentScreenText)}
+                                    {clientScope.dynamicScopeParameter && (
+                                        <>: <b>{clientScope.dynamicScopeParameter}</b></>
+                                    )}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
 
-                <form className="form-actions" action={url.oauthAction} method="POST">
+                {(client.attributes.policyUri || client.attributes.tosUri) && (
+                    <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "12px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
+                        {client.name ? msg("oauthGrantInformation", advancedMsgStr(client.name)) : msg("oauthGrantInformation", client.clientId)}
+                        {client.attributes.tosUri && (
+                            <>
+                                {" "}{msg("oauthGrantReview")}{" "}
+                                <a href={client.attributes.tosUri} target="_blank" style={{ color: "#6366F1", textDecoration: "none" }}>
+                                    {msg("oauthGrantTos")}
+                                </a>
+                            </>
+                        )}
+                        {client.attributes.policyUri && (
+                            <>
+                                {" "}{msg("oauthGrantReview")}{" "}
+                                <a href={client.attributes.policyUri} target="_blank" style={{ color: "#6366F1", textDecoration: "none" }}>
+                                    {msg("oauthGrantPolicy")}
+                                </a>
+                            </>
+                        )}
+                    </p>
+                )}
+
+                <form action={url.oauthAction} method="POST" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                     <input type="hidden" name="code" value={oauth.code} />
-                    <div className={kcClsx("kcFormGroupClass")}>
-                        <div id="kc-form-options">
-                            <div className={kcClsx("kcFormOptionsWrapperClass")}></div>
-                        </div>
-
-                        <div id="kc-form-buttons">
-                            <div className={kcClsx("kcFormButtonsWrapperClass")}>
-                                <input
-                                    className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonLargeClass")}
-                                    name="accept"
-                                    id="kc-login"
-                                    type="submit"
-                                    value={msgStr("doYes")}
-                                />
-                                <input
-                                    className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonLargeClass")}
-                                    name="cancel"
-                                    id="kc-cancel"
-                                    type="submit"
-                                    value={msgStr("doNo")}
-                                />
-                            </div>
-                        </div>
-                    </div>
+                    <button
+                        name="accept"
+                        type="submit"
+                        style={{
+                            width: "100%",
+                            padding: "11px",
+                            background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                            color: "#ffffff",
+                            border: "none",
+                            borderRadius: "6px",
+                            fontSize: "14px",
+                            fontWeight: 600,
+                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            cursor: "pointer",
+                        }}
+                    >
+                        {msgStr("doYes")}
+                    </button>
+                    <button
+                        name="cancel"
+                        type="submit"
+                        style={{
+                            width: "100%",
+                            padding: "11px",
+                            background: "transparent",
+                            color: "rgba(255,255,255,0.6)",
+                            border: "1px solid rgba(255,255,255,0.15)",
+                            borderRadius: "6px",
+                            fontSize: "14px",
+                            fontWeight: 500,
+                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            cursor: "pointer",
+                        }}
+                    >
+                        {msgStr("doNo")}
+                    </button>
                 </form>
-                <div className="clearfix"></div>
             </div>
         </Template>
     );

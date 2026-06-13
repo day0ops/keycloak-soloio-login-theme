@@ -1,158 +1,175 @@
 import { useState } from "react";
-import { clsx } from "keycloakify/tools/clsx";
-import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { useScript } from "keycloakify/login/pages/LoginUsername.useScript";
 
-export default function LoginUsername(props: PageProps<Extract<KcContext, { pageId: "login-username.ftl" }>, I18n>) {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
+const inputStyle: React.CSSProperties = {
+    width: "100%",
+    padding: "10px 14px",
+    backgroundColor: "#27242E",
+    border: "1px solid #34343B",
+    borderRadius: "6px",
+    color: "#ffffff",
+    fontSize: "14px",
+    fontFamily: "'Geist', 'Open Sans', sans-serif",
+    outline: "none",
+    boxSizing: "border-box",
+};
 
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
+const labelStyle: React.CSSProperties = {
+    display: "block",
+    color: "rgba(255,255,255,0.7)",
+    fontSize: "13px",
+    marginBottom: "6px",
+    fontFamily: "'Geist', 'Open Sans', sans-serif",
+};
 
-    const { social, realm, url, usernameHidden, login, registrationDisabled, messagesPerField, enableWebAuthnConditionalUI, authenticators } =
-        kcContext;
-
+export default function LoginUsername(
+    props: PageProps<Extract<KcContext, { pageId: "login-username.ftl" }>, I18n>
+) {
+    const { kcContext, i18n, Template, classes } = props;
+    const { social, realm, url, usernameHidden, login, registrationDisabled, messagesPerField, enableWebAuthnConditionalUI, authenticators } = kcContext;
     const { msg, msgStr } = i18n;
 
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
 
     const webAuthnButtonId = "authenticateWebAuthnButton";
+    useScript({ webAuthnButtonId, kcContext, i18n });
 
-    useScript({
-        webAuthnButtonId,
-        kcContext,
-        i18n
-    });
+    const hasError = messagesPerField.existsError("username");
 
     return (
         <Template
             kcContext={kcContext}
             i18n={i18n}
-            doUseDefaultCss={doUseDefaultCss}
+            doUseDefaultCss={false}
             classes={classes}
-            displayMessage={!messagesPerField.existsError("username")}
-            displayInfo={realm.password && realm.registrationAllowed && !registrationDisabled}
-            infoNode={
-                <div id="kc-registration">
-                    <span>
-                        {msg("noAccount")}
-                        <a tabIndex={6} href={url.registrationUrl}>
-                            {msg("doRegister")}
-                        </a>
-                    </span>
-                </div>
-            }
+            displayMessage={!hasError}
             headerNode={msg("doLogIn")}
-            socialProvidersNode={
-                <>
-                    {realm.password && social?.providers !== undefined && social.providers.length !== 0 && (
-                        <div id="kc-social-providers" className={kcClsx("kcFormSocialAccountSectionClass")}>
-                            <hr />
-                            <h2>{msg("identity-provider-login-label")}</h2>
-                            <ul className={kcClsx("kcFormSocialAccountListClass", social.providers.length > 3 && "kcFormSocialAccountListGridClass")}>
-                                {social.providers.map((...[p, , providers]) => (
-                                    <li key={p.alias}>
-                                        <a
-                                            id={`social-${p.alias}`}
-                                            className={kcClsx(
-                                                "kcFormSocialAccountListButtonClass",
-                                                providers.length > 3 && "kcFormSocialAccountGridItem"
-                                            )}
-                                            type="button"
-                                            href={p.loginUrl}
-                                        >
-                                            {p.iconClasses && <i className={clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses)} aria-hidden="true"></i>}
-                                            <span className={clsx(kcClsx("kcFormSocialAccountNameClass"), p.iconClasses && "kc-social-icon-text")}>
-                                                {p.displayName}
-                                            </span>
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
+        >
+            {realm.password && (
+                <form
+                    id="kc-form-login"
+                    onSubmit={() => { setIsLoginButtonDisabled(true); return true; }}
+                    action={url.loginAction}
+                    method="post"
+                    style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+                >
+                    {!usernameHidden && (
+                        <div>
+                            <label htmlFor="username" style={labelStyle}>
+                                {!realm.loginWithEmailAllowed
+                                    ? msg("username")
+                                    : !realm.registrationEmailAsUsername
+                                      ? msg("usernameOrEmail")
+                                      : msg("email")}
+                            </label>
+                            <input
+                                tabIndex={2}
+                                id="username"
+                                name="username"
+                                defaultValue={login.username ?? ""}
+                                type="text"
+                                autoFocus
+                                autoComplete={enableWebAuthnConditionalUI ? "username webauthn" : "username"}
+                                aria-invalid={hasError}
+                                style={hasError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)" } : inputStyle}
+                            />
+                            {hasError && (
+                                <span
+                                    style={{ color: "#ff6b7a", fontSize: "12px", marginTop: "4px", display: "block" }}
+                                    aria-live="polite"
+                                >
+                                    {messagesPerField.getFirstError("username")}
+                                </span>
+                            )}
                         </div>
                     )}
-                </>
-            }
-        >
-            <div id="kc-form">
-                <div id="kc-form-wrapper">
-                    {realm.password && (
-                        <form
-                            id="kc-form-login"
-                            onSubmit={() => {
-                                setIsLoginButtonDisabled(true);
-                                return true;
-                            }}
-                            action={url.loginAction}
-                            method="post"
-                        >
-                            {!usernameHidden && (
-                                <div className={kcClsx("kcFormGroupClass")}>
-                                    <label htmlFor="username" className={kcClsx("kcLabelClass")}>
-                                        {!realm.loginWithEmailAllowed
-                                            ? msg("username")
-                                            : !realm.registrationEmailAsUsername
-                                              ? msg("usernameOrEmail")
-                                              : msg("email")}
-                                    </label>
-                                    <input
-                                        tabIndex={2}
-                                        id="username"
-                                        className={kcClsx("kcInputClass")}
-                                        name="username"
-                                        defaultValue={login.username ?? ""}
-                                        type="text"
-                                        autoFocus
-                                        autoComplete={enableWebAuthnConditionalUI ? "username webauthn" : "username"}
-                                        aria-invalid={messagesPerField.existsError("username")}
-                                    />
-                                    {messagesPerField.existsError("username") && (
-                                        <span id="input-error" className={kcClsx("kcInputErrorMessageClass")} aria-live="polite">
-                                            {messagesPerField.getFirstError("username")}
-                                        </span>
-                                    )}
-                                </div>
-                            )}
 
-                            <div className={kcClsx("kcFormGroupClass", "kcFormSettingClass")}>
-                                <div id="kc-form-options">
-                                    {realm.rememberMe && !usernameHidden && (
-                                        <div className="checkbox">
-                                            <label>
-                                                <input
-                                                    tabIndex={3}
-                                                    id="rememberMe"
-                                                    name="rememberMe"
-                                                    type="checkbox"
-                                                    defaultChecked={!!login.rememberMe}
-                                                />{" "}
-                                                {msg("rememberMe")}
-                                            </label>
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-
-                            <div id="kc-form-buttons" className={kcClsx("kcFormGroupClass")}>
-                                <input
-                                    tabIndex={4}
-                                    disabled={isLoginButtonDisabled}
-                                    className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
-                                    name="login"
-                                    id="kc-login"
-                                    type="submit"
-                                    value={msgStr("doLogIn")}
-                                />
-                            </div>
-                        </form>
+                    {realm.rememberMe && !usernameHidden && (
+                        <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.6)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", cursor: "pointer" }}>
+                            <input
+                                tabIndex={3}
+                                id="rememberMe"
+                                name="rememberMe"
+                                type="checkbox"
+                                defaultChecked={!!login.rememberMe}
+                            />
+                            {msg("rememberMe")}
+                        </label>
                     )}
+
+                    <button
+                        tabIndex={4}
+                        disabled={isLoginButtonDisabled}
+                        name="login"
+                        type="submit"
+                        style={{
+                            width: "100%",
+                            padding: "11px",
+                            background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                            color: "#ffffff",
+                            border: "none",
+                            borderRadius: "6px",
+                            fontSize: "14px",
+                            fontWeight: 600,
+                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            cursor: isLoginButtonDisabled ? "not-allowed" : "pointer",
+                            opacity: isLoginButtonDisabled ? 0.6 : 1,
+                        }}
+                    >
+                        {msgStr("doLogIn")}
+                    </button>
+
+                    {realm.password && realm.registrationAllowed && !registrationDisabled && (
+                        <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                            {msg("noAccount")}{" "}
+                            <a tabIndex={6} href={url.registrationUrl} style={{ color: "#6366F1", textDecoration: "none" }}>
+                                {msg("doRegister")}
+                            </a>
+                        </p>
+                    )}
+                </form>
+            )}
+
+            {realm.password && social?.providers !== undefined && social.providers.length !== 0 && (
+                <div style={{ marginTop: "24px" }}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
+                        <div style={{ flex: 1, height: "1px", backgroundColor: "rgba(52,52,59,0.6)" }} />
+                        <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "12px", fontFamily: "'Geist', 'Open Sans', sans-serif", whiteSpace: "nowrap" }}>
+                            {msg("identity-provider-login-label")}
+                        </span>
+                        <div style={{ flex: 1, height: "1px", backgroundColor: "rgba(52,52,59,0.6)" }} />
+                    </div>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                        {social.providers.map(p => (
+                            <a
+                                key={p.alias}
+                                id={`social-${p.alias}`}
+                                href={p.loginUrl}
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    gap: "8px",
+                                    padding: "10px 16px",
+                                    backgroundColor: "#27242E",
+                                    border: "1px solid #34343B",
+                                    borderRadius: "6px",
+                                    color: "#ffffff",
+                                    fontSize: "14px",
+                                    fontFamily: "'Geist', 'Open Sans', sans-serif",
+                                    textDecoration: "none",
+                                }}
+                            >
+                                {p.displayName}
+                            </a>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
+
             {enableWebAuthnConditionalUI && (
                 <>
                     <form id="webauth" action={url.loginAction} method="post">
@@ -163,23 +180,29 @@ export default function LoginUsername(props: PageProps<Extract<KcContext, { page
                         <input type="hidden" id="userHandle" name="userHandle" />
                         <input type="hidden" id="error" name="error" />
                     </form>
-
                     {authenticators !== undefined && authenticators.authenticators.length !== 0 && (
-                        <>
-                            <form id="authn_select" className={kcClsx("kcFormClass")}>
-                                {authenticators.authenticators.map((authenticator, i) => (
-                                    <input key={i} type="hidden" name="authn_use_chk" readOnly value={authenticator.credentialId} />
-                                ))}
-                            </form>
-                        </>
+                        <form id="authn_select">
+                            {authenticators.authenticators.map((authenticator, i) => (
+                                <input key={i} type="hidden" name="authn_use_chk" readOnly value={authenticator.credentialId} />
+                            ))}
+                        </form>
                     )}
-                    <br />
-
                     <input
                         id={webAuthnButtonId}
                         type="button"
-                        className={kcClsx("kcButtonClass", "kcButtonDefaultClass", "kcButtonBlockClass", "kcButtonLargeClass")}
                         value={msgStr("passkey-doAuthenticate")}
+                        style={{
+                            marginTop: "10px",
+                            width: "100%",
+                            padding: "11px",
+                            background: "transparent",
+                            color: "rgba(255,255,255,0.6)",
+                            border: "1px solid rgba(255,255,255,0.15)",
+                            borderRadius: "6px",
+                            fontSize: "14px",
+                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            cursor: "pointer",
+                        }}
                     />
                 </>
             )}

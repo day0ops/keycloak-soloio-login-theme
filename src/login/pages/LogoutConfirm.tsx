@@ -1,49 +1,53 @@
-import { getKcClsx } from "keycloakify/login/lib/kcClsx";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
 export default function LogoutConfirm(props: PageProps<Extract<KcContext, { pageId: "logout-confirm.ftl" }>, I18n>) {
-    const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
-
-    const { kcClsx } = getKcClsx({
-        doUseDefaultCss,
-        classes
-    });
-
+    const { kcContext, i18n, Template, classes } = props;
     const { url, client, logoutConfirm } = kcContext;
-
     const { msg, msgStr } = i18n;
 
     return (
-        <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={doUseDefaultCss} classes={classes} headerNode={msg("logoutConfirmTitle")}>
-            <div id="kc-logout-confirm" className="content-area">
-                <p className="instruction">{msg("logoutConfirmHeader")}</p>
-                <form className="form-actions" action={url.logoutConfirmAction} method="POST">
+        <Template
+            kcContext={kcContext}
+            i18n={i18n}
+            doUseDefaultCss={false}
+            classes={classes}
+            headerNode={msg("logoutConfirmTitle")}
+        >
+            <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
+                    {msg("logoutConfirmHeader")}
+                </p>
+                <form action={url.logoutConfirmAction} method="POST">
                     <input type="hidden" name="session_code" value={logoutConfirm.code} />
-                    <div className={kcClsx("kcFormGroupClass")}>
-                        <div id="kc-form-options">
-                            <div className={kcClsx("kcFormOptionsWrapperClass")}></div>
-                        </div>
-                        <div id="kc-form-buttons" className={kcClsx("kcFormGroupClass")}>
-                            <input
-                                tabIndex={4}
-                                className={kcClsx("kcButtonClass", "kcButtonPrimaryClass", "kcButtonBlockClass", "kcButtonLargeClass")}
-                                name="confirmLogout"
-                                id="kc-logout"
-                                type="submit"
-                                value={msgStr("doLogout")}
-                            />
-                        </div>
-                    </div>
+                    <button
+                        tabIndex={4}
+                        name="confirmLogout"
+                        type="submit"
+                        style={{
+                            width: "100%",
+                            padding: "11px",
+                            background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                            color: "#ffffff",
+                            border: "none",
+                            borderRadius: "6px",
+                            fontSize: "14px",
+                            fontWeight: 600,
+                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            cursor: "pointer",
+                        }}
+                    >
+                        {msgStr("doLogout")}
+                    </button>
                 </form>
-                <div id="kc-info-message">
-                    {!logoutConfirm.skipLink && client.baseUrl && (
-                        <p>
-                            <a href={client.baseUrl}>{msg("backToApplication")}</a>
-                        </p>
-                    )}
-                </div>
+                {!logoutConfirm.skipLink && client.baseUrl && (
+                    <p style={{ textAlign: "center", margin: 0 }}>
+                        <a href={client.baseUrl} style={{ color: "#6366F1", textDecoration: "none", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                            {msg("backToApplication")}
+                        </a>
+                    </p>
+                )}
             </div>
         </Template>
     );
