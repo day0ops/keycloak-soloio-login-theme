@@ -1,0 +1,113 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      keycloak_version:
+        description: 'Keycloak version (e.g. 26.6.3)'
+        required: true
+        default: '26.6.3'
+      push_image:
+        description: 'Push image to registry'
+        type: boolean
+        default: true
+
+env:
+  REGISTRY: australia-southeast1-docker.pkg.dev
+  IMAGE: australia-southeast1-docker.pkg.dev/field-engineering-apac/kasunt/keycloak
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/jod'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: TypeScript check and build
+        run: npm run build
+
+  build-push:
+    name: Build and Push
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Resolve Keycloak version
+        id: version
+        run: |
+          if [[ "${GITHUB_REF}" == refs/tags/v* ]]; then
+            VERSION="${GITHUB_REF_NAME#v}"
+          else
+            VERSION="${{ inputs.keycloak_version }}"
+          fi
+          echo "KEYCLOAK_VERSION=${VERSION}" >> $GITHUB_ENV
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.SERVICE_ACCOUNT }}
+          token_format: access_token
+
+      - name: Login to Google Artifact Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: ${{ github.event_name == 'push' || inputs.push_image == true }}
+          build-args: |
+            KEYCLOAK_VERSION=${{ env.KEYCLOAK_VERSION }}
+          tags: |
+            ${{ env.IMAGE }}:${{ env.KEYCLOAK_VERSION }}
+            ${{ env.IMAGE }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Create GitHub Release
+        if: startsWith(github.ref, 'refs/tags/v')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "${{ github.ref_name }}" \
+            --title "Keycloak ${{ env.KEYCLOAK_VERSION }}" \
+            --notes "## Solo.io Login Theme — Keycloak ${{ env.KEYCLOAK_VERSION }}
+
+          ### Docker Image
+          \`\`\`
+          ${{ env.IMAGE }}:${{ env.KEYCLOAK_VERSION }}
+          \`\`\`
+
+          ### Pull
+          \`\`\`bash
+          docker pull ${{ env.IMAGE }}:${{ env.KEYCLOAK_VERSION }}
+          \`\`\`" \
+            --latest

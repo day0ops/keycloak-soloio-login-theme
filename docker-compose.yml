@@ -1,0 +1,17 @@
+services:
+  keycloak:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        KEYCLOAK_VERSION: ${KEYCLOAK_VERSION:-26.6.3}
+    image: keycloak-custom:local
+    ports:
+      - "8080:8080"
+    command: start-dev
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+      KC_HTTP_ENABLED: "true"
+      KC_HOSTNAME_STRICT: "false"
+      KC_SPI_THEME_DEFAULT_LOGIN_THEME: keycloak-theme

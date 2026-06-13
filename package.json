@@ -1,0 +1,28 @@
+{
+  "name": "keycloak-soloio-login-theme",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "build-keycloak-theme": "tsc -b && vite build && keycloakify build",
+    "storybook": "storybook dev -p 6006",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "keycloakify": "^11.8.8",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@storybook/react-vite": "^10.4.4",
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.3.4",
+    "storybook": "^10.4.4",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "eslint-plugin-storybook": "10.4.4"
+  }
+}
