@@ -1,6 +1,8 @@
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 export default function LoginOauthGrant(
     props: PageProps<Extract<KcContext, { pageId: "login-oauth-grant.ftl" }>, I18n>
@@ -27,7 +29,7 @@ export default function LoginOauthGrant(
                 )}
 
                 <div>
-                    <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: "0 0 10px" }}>
+                    <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: "0 0 10px" }}>
                         {msg("oauthGrantRequest")}
                     </p>
                     <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "6px" }}>
@@ -39,14 +41,14 @@ export default function LoginOauthGrant(
                                     alignItems: "center",
                                     gap: "8px",
                                     color: "rgba(255,255,255,0.8)",
-                                    fontSize: "13px",
+                                    fontSize: "16px",
                                     fontFamily: "'Geist', 'Open Sans', sans-serif",
                                     padding: "8px 12px",
                                     backgroundColor: "rgba(255,255,255,0.04)",
                                     borderRadius: "4px",
                                 }}
                             >
-                                <span style={{ color: "#6844FF", fontSize: "16px", lineHeight: 1 }}>✓</span>
+                                <FontAwesomeIcon icon={faLock} style={{ color: "#F97316", fontSize: "14px", flexShrink: 0 }} />
                                 <span>
                                     {advancedMsg(clientScope.consentScreenText)}
                                     {clientScope.dynamicScopeParameter && (
@@ -59,7 +61,7 @@ export default function LoginOauthGrant(
                 </div>
 
                 {(client.attributes.policyUri || client.attributes.tosUri) && (
-                    <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "12px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
+                    <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
                         {client.name ? msg("oauthGrantInformation", advancedMsgStr(client.name)) : msg("oauthGrantInformation", client.clientId)}
                         {client.attributes.tosUri && (
                             <>
@@ -92,7 +94,7 @@ export default function LoginOauthGrant(
                             color: "#ffffff",
                             border: "none",
                             borderRadius: "6px",
-                            fontSize: "14px",
+                            fontSize: "15px",
                             fontWeight: 600,
                             fontFamily: "'Geist', 'Open Sans', sans-serif",
                             cursor: "pointer",
@@ -110,7 +112,7 @@ export default function LoginOauthGrant(
                             color: "rgba(255,255,255,0.6)",
                             border: "1px solid rgba(255,255,255,0.15)",
                             borderRadius: "6px",
-                            fontSize: "14px",
+                            fontSize: "15px",
                             fontWeight: 500,
                             fontFamily: "'Geist', 'Open Sans', sans-serif",
                             cursor: "pointer",

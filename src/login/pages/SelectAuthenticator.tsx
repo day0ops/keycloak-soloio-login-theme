@@ -1,6 +1,8 @@
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
 export default function SelectAuthenticator(
     props: PageProps<Extract<KcContext, { pageId: "select-authenticator.ftl" }>, I18n>
@@ -45,14 +47,14 @@ export default function SelectAuthenticator(
                         }}
                     >
                         <div>
-                            <div style={{ color: "#ffffff", fontSize: "14px", fontWeight: 500, fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                            <div style={{ color: "#ffffff", fontSize: "15px", fontWeight: 500, fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
                                 {advancedMsg(sel.displayName)}
                             </div>
-                            <div style={{ color: "rgba(255,255,255,0.45)", fontSize: "12px", marginTop: "3px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                            <div style={{ color: "rgba(255,255,255,0.45)", fontSize: "13px", marginTop: "3px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
                                 {advancedMsg(sel.helpText)}
                             </div>
                         </div>
-                        <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "20px", marginLeft: "12px", lineHeight: 1 }}>›</span>
+                        <FontAwesomeIcon icon={faChevronRight} style={{ color: "rgba(255,255,255,0.3)", fontSize: "14px", marginLeft: "12px", flexShrink: 0 }} />
                     </button>
                 ))}
             </form>

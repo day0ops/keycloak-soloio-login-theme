@@ -6,7 +6,7 @@ import type { I18n } from "../i18n";
 const linkStyle: React.CSSProperties = {
     color: "#6366F1",
     textDecoration: "none",
-    fontSize: "14px",
+    fontSize: "15px",
     fontFamily: "'Geist', 'Open Sans', sans-serif",
 };
 
@@ -34,7 +34,7 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                 <p
                     style={{
                         color: "rgba(255,255,255,0.7)",
-                        fontSize: "14px",
+                        fontSize: "15px",
                         fontFamily: "'Geist', 'Open Sans', sans-serif",
                         margin: 0,
                         lineHeight: 1.6,

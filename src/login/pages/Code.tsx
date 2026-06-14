@@ -19,7 +19,7 @@ export default function Code(props: PageProps<Extract<KcContext, { pageId: "code
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                 {code.success ? (
                     <>
-                        <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
+                        <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "15px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
                             {msg("copyCodeInstruction")}
                         </p>
                         <input
@@ -33,7 +33,7 @@ export default function Code(props: PageProps<Extract<KcContext, { pageId: "code
                                 border: "1px solid #34343B",
                                 borderRadius: "6px",
                                 color: "#ffffff",
-                                fontSize: "14px",
+                                fontSize: "15px",
                                 fontFamily: "'Geist', 'Open Sans', sans-serif",
                                 outline: "none",
                                 boxSizing: "border-box",
@@ -44,7 +44,7 @@ export default function Code(props: PageProps<Extract<KcContext, { pageId: "code
                 ) : (
                     code.error && (
                         <p
-                            style={{ color: "#ff6b7a", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}
+                            style={{ color: "#ff6b7a", fontSize: "15px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}
                             dangerouslySetInnerHTML={{ __html: kcSanitize(code.error) }}
                         />
                     )

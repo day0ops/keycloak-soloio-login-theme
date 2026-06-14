@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faKey } from "@fortawesome/free-solid-svg-icons";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -14,7 +16,7 @@ const inputStyle: React.CSSProperties = {
     border: "1px solid #34343B",
     borderRadius: "6px",
     color: "#ffffff",
-    fontSize: "14px",
+    fontSize: "15px",
     fontFamily: "'Geist', 'Open Sans', sans-serif",
     outline: "none",
     boxSizing: "border-box",
@@ -23,10 +25,20 @@ const inputStyle: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
     display: "block",
     color: "rgba(255,255,255,0.7)",
-    fontSize: "13px",
+    fontSize: "14px",
     marginBottom: "6px",
     fontFamily: "'Geist', 'Open Sans', sans-serif",
 };
+
+const iconStyle = {
+    position: "absolute",
+    left: "14px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    color: "rgba(255,255,255,0.35)",
+    fontSize: "14px",
+    pointerEvents: "none",
+} as const satisfies React.CSSProperties;
 
 function EyeIcon() {
     return (
@@ -46,13 +58,14 @@ function EyeOffIcon() {
     );
 }
 
-function PasswordWrapper(props: { i18n: I18n; passwordInputId: string; children: React.ReactElement }) {
-    const { i18n, passwordInputId, children } = props;
+function PasswordWrapper(props: { i18n: I18n; passwordInputId: string; leadingIcon?: React.ReactNode; children: React.ReactElement }) {
+    const { i18n, passwordInputId, leadingIcon, children } = props;
     const { msgStr } = i18n;
     const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({ passwordInputId });
 
     return (
         <div style={{ position: "relative" }}>
+            {leadingIcon}
             {children}
             <button
                 type="button"
@@ -109,7 +122,7 @@ export default function LoginUpdatePassword(
                     <label htmlFor="password-new" style={labelStyle}>
                         {msg("passwordNew")}
                     </label>
-                    <PasswordWrapper i18n={i18n} passwordInputId="password-new">
+                    <PasswordWrapper i18n={i18n} passwordInputId="password-new" leadingIcon={<FontAwesomeIcon icon={faKey} style={iconStyle} />}>
                         <input
                             type="password"
                             id="password-new"
@@ -117,12 +130,12 @@ export default function LoginUpdatePassword(
                             autoFocus
                             autoComplete="new-password"
                             aria-invalid={messagesPerField.existsError("password", "password-confirm")}
-                            style={hasPasswordError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)" } : inputStyle}
+                            style={hasPasswordError ? { ...inputStyle, paddingLeft: "40px", border: "1px solid rgba(220,53,69,0.6)" } : { ...inputStyle, paddingLeft: "40px" }}
                         />
                     </PasswordWrapper>
                     {hasPasswordError && (
                         <span
-                            style={{ color: "#ff6b7a", fontSize: "12px", marginTop: "4px", display: "block" }}
+                            style={{ color: "#ff6b7a", fontSize: "13px", marginTop: "4px", display: "block" }}
                             aria-live="polite"
                             dangerouslySetInnerHTML={{ __html: kcSanitize(messagesPerField.get("password")) }}
                         />
@@ -133,26 +146,26 @@ export default function LoginUpdatePassword(
                     <label htmlFor="password-confirm" style={labelStyle}>
                         {msg("passwordConfirm")}
                     </label>
-                    <PasswordWrapper i18n={i18n} passwordInputId="password-confirm">
+                    <PasswordWrapper i18n={i18n} passwordInputId="password-confirm" leadingIcon={<FontAwesomeIcon icon={faKey} style={iconStyle} />}>
                         <input
                             type="password"
                             id="password-confirm"
                             name="password-confirm"
                             autoComplete="new-password"
                             aria-invalid={messagesPerField.existsError("password", "password-confirm")}
-                            style={hasConfirmError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)" } : inputStyle}
+                            style={hasConfirmError ? { ...inputStyle, paddingLeft: "40px", border: "1px solid rgba(220,53,69,0.6)" } : { ...inputStyle, paddingLeft: "40px" }}
                         />
                     </PasswordWrapper>
                     {hasConfirmError && (
                         <span
-                            style={{ color: "#ff6b7a", fontSize: "12px", marginTop: "4px", display: "block" }}
+                            style={{ color: "#ff6b7a", fontSize: "13px", marginTop: "4px", display: "block" }}
                             aria-live="polite"
                             dangerouslySetInnerHTML={{ __html: kcSanitize(messagesPerField.get("password-confirm")) }}
                         />
                     )}
                 </div>
 
-                <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.6)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", cursor: "pointer" }}>
+                <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.6)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", cursor: "pointer" }}>
                     <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} />
                     {msg("logoutOtherSessions")}
                 </label>
@@ -167,7 +180,7 @@ export default function LoginUpdatePassword(
                             color: "#ffffff",
                             border: "none",
                             borderRadius: "6px",
-                            fontSize: "14px",
+                            fontSize: "15px",
                             fontWeight: 600,
                             fontFamily: "'Geist', 'Open Sans', sans-serif",
                             cursor: "pointer",
@@ -187,7 +200,7 @@ export default function LoginUpdatePassword(
                                 color: "rgba(255,255,255,0.6)",
                                 border: "1px solid rgba(255,255,255,0.15)",
                                 borderRadius: "6px",
-                                fontSize: "14px",
+                                fontSize: "15px",
                                 fontWeight: 500,
                                 fontFamily: "'Geist', 'Open Sans', sans-serif",
                                 cursor: "pointer",

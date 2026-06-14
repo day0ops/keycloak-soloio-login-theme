@@ -17,7 +17,7 @@ export default function LinkIdpAction(props: PageProps<Extract<KcContext, { page
             headerNode={msg("linkIdpActionTitle", idpDisplayName)}
         >
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
+                <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "15px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
                     {msg("linkIdpActionMessage", idpDisplayName)}
                 </p>
                 <form action={url.loginAction} method="post" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -31,7 +31,7 @@ export default function LinkIdpAction(props: PageProps<Extract<KcContext, { page
                             color: "#ffffff",
                             border: "none",
                             borderRadius: "6px",
-                            fontSize: "14px",
+                            fontSize: "15px",
                             fontWeight: 600,
                             fontFamily: "'Geist', 'Open Sans', sans-serif",
                             cursor: "pointer",
@@ -50,7 +50,7 @@ export default function LinkIdpAction(props: PageProps<Extract<KcContext, { page
                             color: "rgba(255,255,255,0.6)",
                             border: "1px solid rgba(255,255,255,0.15)",
                             borderRadius: "6px",
-                            fontSize: "14px",
+                            fontSize: "15px",
                             fontWeight: 500,
                             fontFamily: "'Geist', 'Open Sans', sans-serif",
                             cursor: "pointer",

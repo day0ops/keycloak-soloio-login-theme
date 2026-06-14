@@ -93,7 +93,7 @@ export default function Register(props: RegisterProps) {
                                 color: "#ffffff",
                                 border: "none",
                                 borderRadius: "6px",
-                                fontSize: "14px",
+                                fontSize: "17px",
                                 fontWeight: 600,
                                 fontFamily: "'Geist', 'Open Sans', sans-serif",
                                 cursor: "pointer",
@@ -112,7 +112,7 @@ export default function Register(props: RegisterProps) {
                                 color: "#ffffff",
                                 border: "none",
                                 borderRadius: "6px",
-                                fontSize: "14px",
+                                fontSize: "17px",
                                 fontWeight: 600,
                                 fontFamily: "'Geist', 'Open Sans', sans-serif",
                                 cursor: (!isFormSubmittable || (termsAcceptanceRequired && !areTermsAccepted)) ? "not-allowed" : "pointer",
@@ -122,7 +122,7 @@ export default function Register(props: RegisterProps) {
                             {msgStr("doRegister")}
                         </button>
                     )}
-                    <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                    <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "16px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
                         <a href={url.loginUrl} style={{ color: "#6366F1", textDecoration: "none" }}>
                             {msg("backToLogin")}
                         </a>
@@ -145,7 +145,7 @@ function TermsAcceptance(props: {
     return (
         <div style={{ marginBottom: "16px", display: "flex", flexDirection: "column", gap: "10px" }}>
             <div>
-                <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: "0 0 6px" }}>
+                <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "16px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: "0 0 6px" }}>
                     {msg("termsTitle")}
                 </p>
                 <div
@@ -156,7 +156,7 @@ function TermsAcceptance(props: {
                         border: "1px solid #34343B",
                         borderRadius: "6px",
                         color: "rgba(255,255,255,0.6)",
-                        fontSize: "12px",
+                        fontSize: "15px",
                         fontFamily: "'Geist', 'Open Sans', sans-serif",
                         maxHeight: "120px",
                         overflowY: "auto",
@@ -175,13 +175,13 @@ function TermsAcceptance(props: {
                     onChange={e => onAreTermsAcceptedValueChange(e.target.checked)}
                     aria-invalid={messagesPerField.existsError("termsAccepted")}
                 />
-                <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "16px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
                     {msg("acceptTerms")}
                 </span>
             </label>
             {messagesPerField.existsError("termsAccepted") && (
                 <span
-                    style={{ color: "#ff6b7a", fontSize: "12px", display: "block" }}
+                    style={{ color: "#ff6b7a", fontSize: "15px", display: "block" }}
                     aria-live="polite"
                     dangerouslySetInnerHTML={{ __html: kcSanitize(messagesPerField.get("termsAccepted")) }}
                 />

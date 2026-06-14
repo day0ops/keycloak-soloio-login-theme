@@ -1,0 +1,5 @@
+{
+  "realm": "master",
+  "loginTheme": "keycloak-theme",
+  "enabled": true
+}
