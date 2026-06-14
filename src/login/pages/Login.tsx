@@ -23,7 +23,7 @@ const inputErrorStyle: React.CSSProperties = {
     border: "1px solid rgba(220,53,69,0.6)",
 };
 
-const iconStyle: React.CSSProperties = {
+const iconStyle = {
     position: "absolute",
     left: "14px",
     top: "50%",
@@ -31,7 +31,7 @@ const iconStyle: React.CSSProperties = {
     color: "rgba(255,255,255,0.35)",
     fontSize: "14px",
     pointerEvents: "none",
-};
+} as const satisfies React.CSSProperties;
 
 const labelStyle: React.CSSProperties = {
     display: "block",
@@ -75,7 +75,7 @@ export default function Login(
                                   : msg("email")}
                         </label>
                         <div style={{ position: "relative" }}>
-                            <FontAwesomeIcon icon={faUser} style={iconStyle as any} />
+                            <FontAwesomeIcon icon={faUser} style={iconStyle} />
                             <input
                                 tabIndex={2}
                                 id="username"
@@ -105,7 +105,7 @@ export default function Login(
                         {msg("password")}
                     </label>
                     <div style={{ position: "relative" }}>
-                        <FontAwesomeIcon icon={faLock} style={iconStyle as any} />
+                        <FontAwesomeIcon icon={faLock} style={iconStyle} />
                         <input
                             tabIndex={3}
                             id="password"
