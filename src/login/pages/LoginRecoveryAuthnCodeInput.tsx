@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShieldHalved } from "@fortawesome/free-solid-svg-icons";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
@@ -10,7 +12,7 @@ const inputStyle: React.CSSProperties = {
     border: "1px solid #34343B",
     borderRadius: "6px",
     color: "#ffffff",
-    fontSize: "14px",
+    fontSize: "15px",
     fontFamily: "'Geist', 'Open Sans', sans-serif",
     outline: "none",
     boxSizing: "border-box",
@@ -20,10 +22,20 @@ const inputStyle: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
     display: "block",
     color: "rgba(255,255,255,0.7)",
-    fontSize: "13px",
+    fontSize: "14px",
     marginBottom: "6px",
     fontFamily: "'Geist', 'Open Sans', sans-serif",
 };
+
+const iconStyle = {
+    position: "absolute",
+    left: "14px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    color: "rgba(255,255,255,0.35)",
+    fontSize: "14px",
+    pointerEvents: "none",
+} as const satisfies React.CSSProperties;
 
 export default function LoginRecoveryAuthnCodeInput(
     props: PageProps<Extract<KcContext, { pageId: "login-recovery-authn-code-input.ftl" }>, I18n>
@@ -53,19 +65,22 @@ export default function LoginRecoveryAuthnCodeInput(
                     <label htmlFor="recoveryCodeInput" style={labelStyle}>
                         {msg("auth-recovery-code-prompt", `${recoveryAuthnCodesInputBean.codeNumber}`)}
                     </label>
-                    <input
-                        tabIndex={1}
-                        id="recoveryCodeInput"
-                        name="recoveryCodeInput"
-                        autoComplete="off"
-                        type="text"
-                        autoFocus
-                        aria-invalid={hasError}
-                        style={hasError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)" } : inputStyle}
-                    />
+                    <div style={{ position: "relative" }}>
+                        <FontAwesomeIcon icon={faShieldHalved} style={iconStyle} />
+                        <input
+                            tabIndex={1}
+                            id="recoveryCodeInput"
+                            name="recoveryCodeInput"
+                            autoComplete="off"
+                            type="text"
+                            autoFocus
+                            aria-invalid={hasError}
+                            style={hasError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)", paddingLeft: "40px" } : { ...inputStyle, paddingLeft: "40px" }}
+                        />
+                    </div>
                     {hasError && (
                         <span
-                            style={{ color: "#ff6b7a", fontSize: "12px", marginTop: "4px", display: "block" }}
+                            style={{ color: "#ff6b7a", fontSize: "13px", marginTop: "4px", display: "block" }}
                             aria-live="polite"
                             dangerouslySetInnerHTML={{ __html: kcSanitize(messagesPerField.get("recoveryCodeInput")) }}
                         />
@@ -81,7 +96,7 @@ export default function LoginRecoveryAuthnCodeInput(
                         color: "#ffffff",
                         border: "none",
                         borderRadius: "6px",
-                        fontSize: "14px",
+                        fontSize: "15px",
                         fontWeight: 600,
                         fontFamily: "'Geist', 'Open Sans', sans-serif",
                         cursor: "pointer",
