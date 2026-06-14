@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faLock } from "@fortawesome/free-solid-svg-icons";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
 import { useIsPasswordRevealed } from "keycloakify/tools/useIsPasswordRevealed";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
@@ -14,7 +16,7 @@ const inputStyle: React.CSSProperties = {
     border: "1px solid #34343B",
     borderRadius: "6px",
     color: "#ffffff",
-    fontSize: "14px",
+    fontSize: "15px",
     fontFamily: "'Geist', 'Open Sans', sans-serif",
     outline: "none",
     boxSizing: "border-box",
@@ -23,10 +25,20 @@ const inputStyle: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
     display: "block",
     color: "rgba(255,255,255,0.7)",
-    fontSize: "13px",
+    fontSize: "14px",
     marginBottom: "6px",
     fontFamily: "'Geist', 'Open Sans', sans-serif",
 };
+
+const iconStyle = {
+    position: "absolute",
+    left: "14px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    color: "rgba(255,255,255,0.35)",
+    fontSize: "14px",
+    pointerEvents: "none",
+} as const satisfies React.CSSProperties;
 
 function EyeIcon() {
     return (
@@ -46,13 +58,14 @@ function EyeOffIcon() {
     );
 }
 
-function PasswordWrapper(props: { i18n: I18n; passwordInputId: string; children: React.ReactElement }) {
-    const { i18n, passwordInputId, children } = props;
+function PasswordWrapper(props: { i18n: I18n; passwordInputId: string; leadingIcon?: React.ReactNode; children: React.ReactElement }) {
+    const { i18n, passwordInputId, leadingIcon, children } = props;
     const { msgStr } = i18n;
     const { isPasswordRevealed, toggleIsPasswordRevealed } = useIsPasswordRevealed({ passwordInputId });
 
     return (
         <div style={{ position: "relative" }}>
+            {leadingIcon}
             {children}
             <button
                 type="button"
@@ -115,7 +128,7 @@ export default function LoginPassword(
                     <label htmlFor="password" style={labelStyle}>
                         {msg("password")}
                     </label>
-                    <PasswordWrapper i18n={i18n} passwordInputId="password">
+                    <PasswordWrapper i18n={i18n} passwordInputId="password" leadingIcon={<FontAwesomeIcon icon={faLock} style={iconStyle} />}>
                         <input
                             tabIndex={2}
                             id="password"
@@ -124,12 +137,12 @@ export default function LoginPassword(
                             autoFocus
                             autoComplete="on"
                             aria-invalid={messagesPerField.existsError("username", "password")}
-                            style={hasError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)" } : inputStyle}
+                            style={hasError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)", paddingLeft: "40px" } : { ...inputStyle, paddingLeft: "40px" }}
                         />
                     </PasswordWrapper>
                     {hasError && (
                         <span
-                            style={{ color: "#ff6b7a", fontSize: "12px", marginTop: "4px", display: "block" }}
+                            style={{ color: "#ff6b7a", fontSize: "13px", marginTop: "4px", display: "block" }}
                             aria-live="polite"
                             dangerouslySetInnerHTML={{ __html: kcSanitize(messagesPerField.get("password")) }}
                         />
@@ -138,7 +151,7 @@ export default function LoginPassword(
 
                 {realm.resetPasswordAllowed && (
                     <p style={{ margin: 0, textAlign: "right" }}>
-                        <a tabIndex={5} href={url.loginResetCredentialsUrl} style={{ color: "#6366F1", fontSize: "13px", textDecoration: "none", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                        <a tabIndex={5} href={url.loginResetCredentialsUrl} style={{ color: "#6366F1", fontSize: "14px", textDecoration: "none", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
                             {msg("doForgotPassword")}
                         </a>
                     </p>
@@ -156,7 +169,7 @@ export default function LoginPassword(
                         color: "#ffffff",
                         border: "none",
                         borderRadius: "6px",
-                        fontSize: "14px",
+                        fontSize: "15px",
                         fontWeight: 600,
                         fontFamily: "'Geist', 'Open Sans', sans-serif",
                         cursor: isLoginButtonDisabled ? "not-allowed" : "pointer",
@@ -196,7 +209,7 @@ export default function LoginPassword(
                             color: "rgba(255,255,255,0.6)",
                             border: "1px solid rgba(255,255,255,0.15)",
                             borderRadius: "6px",
-                            fontSize: "14px",
+                            fontSize: "15px",
                             fontFamily: "'Geist', 'Open Sans', sans-serif",
                             cursor: "pointer",
                         }}
