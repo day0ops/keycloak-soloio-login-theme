@@ -97,9 +97,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "${{ github.ref_name }}" \
-            --title "Keycloak ${{ env.KEYCLOAK_VERSION }}" \
-            --notes "## Solo.io Login Theme — Keycloak ${{ env.KEYCLOAK_VERSION }}
+          NOTES="## Solo.io Login Theme — Keycloak ${{ env.KEYCLOAK_VERSION }}
 
           ### Docker Image
           \`\`\`
@@ -109,5 +107,16 @@ jobs:
           ### Pull
           \`\`\`bash
           docker pull ${{ env.IMAGE }}:${{ env.KEYCLOAK_VERSION }}
-          \`\`\`" \
-            --latest
+          \`\`\`"
+
+          if gh release view "${{ github.ref_name }}" &>/dev/null; then
+            gh release edit "${{ github.ref_name }}" \
+              --title "Keycloak ${{ env.KEYCLOAK_VERSION }}" \
+              --notes "${NOTES}" \
+              --latest
+          else
+            gh release create "${{ github.ref_name }}" \
+              --title "Keycloak ${{ env.KEYCLOAK_VERSION }}" \
+              --notes "${NOTES}" \
+              --latest
+          fi
