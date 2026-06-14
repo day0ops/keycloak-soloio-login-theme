@@ -69,7 +69,8 @@ export default function LoginOauth2DeviceVerifyUserCode(
                             type="text"
                             autoComplete="off"
                             autoFocus
-                            style={{ ...inputStyle, paddingLeft: "40px" }}
+                            className="has-icon"
+                            style={inputStyle}
                         />
                     </div>
                 </div>

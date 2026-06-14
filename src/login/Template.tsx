@@ -44,6 +44,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 box-sizing: border-box !important;
                 font-size: 17px !important;
             }
+            input.has-icon { padding-left: 40px !important; }
             input[type="text"]::placeholder, input[type="email"]::placeholder, input[type="password"]::placeholder {
                 color: rgba(255,255,255,0.3) !important;
             }

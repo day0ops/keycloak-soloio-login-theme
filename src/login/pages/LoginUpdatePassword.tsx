@@ -130,7 +130,8 @@ export default function LoginUpdatePassword(
                             autoFocus
                             autoComplete="new-password"
                             aria-invalid={messagesPerField.existsError("password", "password-confirm")}
-                            style={hasPasswordError ? { ...inputStyle, paddingLeft: "40px", border: "1px solid rgba(220,53,69,0.6)" } : { ...inputStyle, paddingLeft: "40px" }}
+                            className="has-icon"
+                            style={hasPasswordError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)" } : inputStyle}
                         />
                     </PasswordWrapper>
                     {hasPasswordError && (
@@ -153,7 +154,8 @@ export default function LoginUpdatePassword(
                             name="password-confirm"
                             autoComplete="new-password"
                             aria-invalid={messagesPerField.existsError("password", "password-confirm")}
-                            style={hasConfirmError ? { ...inputStyle, paddingLeft: "40px", border: "1px solid rgba(220,53,69,0.6)" } : { ...inputStyle, paddingLeft: "40px" }}
+                            className="has-icon"
+                            style={hasConfirmError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)" } : inputStyle}
                         />
                     </PasswordWrapper>
                     {hasConfirmError && (

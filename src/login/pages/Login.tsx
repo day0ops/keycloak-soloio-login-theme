@@ -85,9 +85,10 @@ export default function Login(
                                 autoFocus
                                 autoComplete="username"
                                 aria-invalid={messagesPerField.existsError("username", "password")}
+                                className="has-icon"
                                 style={messagesPerField.existsError("username", "password")
-                                    ? { ...inputErrorStyle, paddingLeft: "40px" }
-                                    : { ...inputStyle, paddingLeft: "40px" }}
+                                    ? inputErrorStyle
+                                    : inputStyle}
                             />
                         </div>
                         {messagesPerField.existsError("username", "password") && (
@@ -113,9 +114,10 @@ export default function Login(
                             type="password"
                             autoComplete="current-password"
                             aria-invalid={messagesPerField.existsError("username", "password")}
+                            className="has-icon"
                             style={messagesPerField.existsError("username", "password")
-                                ? { ...inputErrorStyle, paddingLeft: "40px" }
-                                : { ...inputStyle, paddingLeft: "40px" }}
+                                ? inputErrorStyle
+                                : inputStyle}
                         />
                     </div>
                 </div>

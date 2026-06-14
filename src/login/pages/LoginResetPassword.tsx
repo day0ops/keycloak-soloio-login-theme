@@ -72,9 +72,10 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                             autoFocus
                             defaultValue={auth.attemptedUsername ?? ""}
                             aria-invalid={messagesPerField.existsError("username")}
+                            className="has-icon"
                             style={messagesPerField.existsError("username")
-                                ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)", paddingLeft: "40px" }
-                                : { ...inputStyle, paddingLeft: "40px" }}
+                                ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)" }
+                                : inputStyle}
                         />
                     </div>
                     {messagesPerField.existsError("username") && (

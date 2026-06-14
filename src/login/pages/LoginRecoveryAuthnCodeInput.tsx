@@ -75,7 +75,8 @@ export default function LoginRecoveryAuthnCodeInput(
                             type="text"
                             autoFocus
                             aria-invalid={hasError}
-                            style={hasError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)", paddingLeft: "40px" } : { ...inputStyle, paddingLeft: "40px" }}
+                            className="has-icon"
+                            style={hasError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)" } : inputStyle}
                         />
                     </div>
                     {hasError && (

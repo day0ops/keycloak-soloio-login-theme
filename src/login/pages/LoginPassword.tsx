@@ -137,7 +137,8 @@ export default function LoginPassword(
                             autoFocus
                             autoComplete="on"
                             aria-invalid={messagesPerField.existsError("username", "password")}
-                            style={hasError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)", paddingLeft: "40px" } : { ...inputStyle, paddingLeft: "40px" }}
+                            className="has-icon"
+                            style={hasError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)" } : inputStyle}
                         />
                     </PasswordWrapper>
                     {hasError && (
