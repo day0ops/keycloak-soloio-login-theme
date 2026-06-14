@@ -2,6 +2,8 @@ import { useState } from "react";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../../kc.gen";
 import type { I18n } from "../../i18n";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser, faLock } from "@fortawesome/free-solid-svg-icons";
 
 const inputStyle: React.CSSProperties = {
     width: "100%",
@@ -10,7 +12,7 @@ const inputStyle: React.CSSProperties = {
     border: "1px solid #34343B",
     borderRadius: "6px",
     color: "#ffffff",
-    fontSize: "14px",
+    fontSize: "17px",
     fontFamily: "'Geist', 'Open Sans', sans-serif",
     outline: "none",
     boxSizing: "border-box",
@@ -21,10 +23,20 @@ const inputErrorStyle: React.CSSProperties = {
     border: "1px solid rgba(220,53,69,0.6)",
 };
 
+const iconStyle: React.CSSProperties = {
+    position: "absolute",
+    left: "14px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    color: "rgba(255,255,255,0.35)",
+    fontSize: "14px",
+    pointerEvents: "none",
+};
+
 const labelStyle: React.CSSProperties = {
     display: "block",
     color: "rgba(255,255,255,0.7)",
-    fontSize: "13px",
+    fontSize: "16px",
     marginBottom: "6px",
     fontFamily: "'Geist', 'Open Sans', sans-serif",
 };
@@ -62,20 +74,25 @@ export default function Login(
                                   ? msg("usernameOrEmail")
                                   : msg("email")}
                         </label>
-                        <input
-                            tabIndex={2}
-                            id="username"
-                            name="username"
-                            defaultValue={login.username ?? ""}
-                            type="text"
-                            autoFocus
-                            autoComplete="username"
-                            aria-invalid={messagesPerField.existsError("username", "password")}
-                            style={messagesPerField.existsError("username", "password") ? inputErrorStyle : inputStyle}
-                        />
+                        <div style={{ position: "relative" }}>
+                            <FontAwesomeIcon icon={faUser} style={iconStyle as any} />
+                            <input
+                                tabIndex={2}
+                                id="username"
+                                name="username"
+                                defaultValue={login.username ?? ""}
+                                type="text"
+                                autoFocus
+                                autoComplete="username"
+                                aria-invalid={messagesPerField.existsError("username", "password")}
+                                style={messagesPerField.existsError("username", "password")
+                                    ? { ...inputErrorStyle, paddingLeft: "40px" }
+                                    : { ...inputStyle, paddingLeft: "40px" }}
+                            />
+                        </div>
                         {messagesPerField.existsError("username", "password") && (
                             <span
-                                style={{ color: "#ff6b7a", fontSize: "12px", marginTop: "4px", display: "block" }}
+                                style={{ color: "#ff6b7a", fontSize: "15px", marginTop: "4px", display: "block" }}
                                 aria-live="polite"
                                 dangerouslySetInnerHTML={{ __html: messagesPerField.getFirstError("username", "password") }}
                             />
@@ -87,20 +104,25 @@ export default function Login(
                     <label htmlFor="password" style={labelStyle}>
                         {msg("password")}
                     </label>
-                    <input
-                        tabIndex={3}
-                        id="password"
-                        name="password"
-                        type="password"
-                        autoComplete="current-password"
-                        aria-invalid={messagesPerField.existsError("username", "password")}
-                        style={messagesPerField.existsError("username", "password") ? inputErrorStyle : inputStyle}
-                    />
+                    <div style={{ position: "relative" }}>
+                        <FontAwesomeIcon icon={faLock} style={iconStyle as any} />
+                        <input
+                            tabIndex={3}
+                            id="password"
+                            name="password"
+                            type="password"
+                            autoComplete="current-password"
+                            aria-invalid={messagesPerField.existsError("username", "password")}
+                            style={messagesPerField.existsError("username", "password")
+                                ? { ...inputErrorStyle, paddingLeft: "40px" }
+                                : { ...inputStyle, paddingLeft: "40px" }}
+                        />
+                    </div>
                 </div>
 
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
                     {realm.rememberMe && !usernameHidden && (
-                        <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.6)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", cursor: "pointer" }}>
+                        <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.6)", fontSize: "16px", fontFamily: "'Geist', 'Open Sans', sans-serif", cursor: "pointer" }}>
                             <input
                                 tabIndex={5}
                                 id="rememberMe"
@@ -115,7 +137,7 @@ export default function Login(
                         <a
                             tabIndex={6}
                             href={url.loginResetCredentialsUrl}
-                            style={{ color: "#6366F1", fontSize: "13px", textDecoration: "none", fontFamily: "'Geist', 'Open Sans', sans-serif" }}
+                            style={{ color: "#6366F1", fontSize: "16px", textDecoration: "none", fontFamily: "'Geist', 'Open Sans', sans-serif" }}
                         >
                             {msg("doForgotPassword")}
                         </a>
@@ -133,7 +155,7 @@ export default function Login(
                         color: "#ffffff",
                         border: "none",
                         borderRadius: "6px",
-                        fontSize: "14px",
+                        fontSize: "17px",
                         fontWeight: 600,
                         fontFamily: "'Geist', 'Open Sans', sans-serif",
                         cursor: isLoginButtonDisabled ? "not-allowed" : "pointer",
@@ -146,7 +168,7 @@ export default function Login(
             </form>
 
             {realm.password && realm.registrationAllowed && !registrationDisabled && (
-                <p style={{ textAlign: "center", marginTop: "24px", color: "rgba(255,255,255,0.45)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                <p style={{ textAlign: "center", marginTop: "24px", color: "rgba(255,255,255,0.45)", fontSize: "16px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
                     {msg("noAccount")}{" "}
                     <a tabIndex={8} href={url.registrationUrl} style={{ color: "#6366F1", textDecoration: "none" }}>
                         {msg("doRegister")}
