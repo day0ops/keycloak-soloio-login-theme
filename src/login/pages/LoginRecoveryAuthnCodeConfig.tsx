@@ -30,10 +30,10 @@ export default function LoginRecoveryAuthnCodeConfig(
                     border: "1px solid rgba(255,193,7,0.3)",
                     borderRadius: "6px",
                 }}>
-                    <p style={{ color: "#ffd966", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: "0 0 4px", fontWeight: 600 }}>
+                    <p style={{ color: "#ffd966", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: "0 0 4px", fontWeight: 600 }}>
                         {msg("recovery-code-config-warning-title")}
                     </p>
-                    <p style={{ color: "rgba(255,217,102,0.8)", fontSize: "12px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
+                    <p style={{ color: "rgba(255,217,102,0.8)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
                         {msg("recovery-code-config-warning-message")}
                     </p>
                 </div>
@@ -54,7 +54,7 @@ export default function LoginRecoveryAuthnCodeConfig(
                     }}
                 >
                     {recoveryAuthnCodesConfigBean.generatedRecoveryAuthnCodesList.map((code, index) => (
-                        <li key={index} style={{ color: "#ffffff", fontSize: "14px", fontFamily: "'Geist Mono', 'Courier New', monospace", display: "flex", gap: "12px" }}>
+                        <li key={index} style={{ color: "#ffffff", fontSize: "15px", fontFamily: "'Geist Mono', 'Courier New', monospace", display: "flex", gap: "12px" }}>
                             <span style={{ color: "rgba(255,255,255,0.3)", minWidth: "20px" }}>{index + 1}.</span>
                             <span style={{ letterSpacing: "0.1em" }}>{code.slice(0, 4)}-{code.slice(4, 8)}-{code.slice(8)}</span>
                         </li>
@@ -79,7 +79,7 @@ export default function LoginRecoveryAuthnCodeConfig(
                                 color: "#6366F1",
                                 border: "1px solid rgba(99,102,241,0.3)",
                                 borderRadius: "6px",
-                                fontSize: "12px",
+                                fontSize: "13px",
                                 fontFamily: "'Geist', 'Open Sans', sans-serif",
                                 cursor: "pointer",
                             }}
@@ -101,7 +101,7 @@ export default function LoginRecoveryAuthnCodeConfig(
                             document.getElementById("saveRecoveryAuthnCodesBtn").disabled = !event.target.checked;
                         }}
                     />
-                    <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                    <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
                         {msg("recovery-codes-confirmation-message")}
                     </span>
                 </label>
@@ -112,7 +112,7 @@ export default function LoginRecoveryAuthnCodeConfig(
                     <input type="hidden" id="userLabel" name="userLabel" value={msgStr("recovery-codes-label-default")} />
 
                     {/* Logout other sessions */}
-                    <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.6)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", cursor: "pointer" }}>
+                    <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.6)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", cursor: "pointer" }}>
                         <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} />
                         {msg("logoutOtherSessions")}
                     </label>
@@ -128,7 +128,7 @@ export default function LoginRecoveryAuthnCodeConfig(
                             color: "#ffffff",
                             border: "none",
                             borderRadius: "6px",
-                            fontSize: "14px",
+                            fontSize: "15px",
                             fontWeight: 600,
                             fontFamily: "'Geist', 'Open Sans', sans-serif",
                             cursor: "not-allowed",
@@ -151,7 +151,7 @@ export default function LoginRecoveryAuthnCodeConfig(
                                 color: "rgba(255,255,255,0.6)",
                                 border: "1px solid rgba(255,255,255,0.15)",
                                 borderRadius: "6px",
-                                fontSize: "14px",
+                                fontSize: "15px",
                                 fontWeight: 500,
                                 fontFamily: "'Geist', 'Open Sans', sans-serif",
                                 cursor: "pointer",

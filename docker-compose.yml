@@ -8,7 +8,9 @@ services:
     image: keycloak-custom:local
     ports:
       - "8080:8080"
-    command: start-dev --spi-theme-default-login-theme=keycloak-theme
+    command: start-dev --import-realm --spi-theme-default-login-theme=keycloak-theme
+    volumes:
+      - ./realm-import.json:/opt/keycloak/data/import/realm-import.json:ro
     environment:
       KC_BOOTSTRAP_ADMIN_USERNAME: admin
       KC_BOOTSTRAP_ADMIN_PASSWORD: admin

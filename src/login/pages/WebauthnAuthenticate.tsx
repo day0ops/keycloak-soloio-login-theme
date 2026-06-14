@@ -44,7 +44,7 @@ export default function WebauthnAuthenticate(
                         {shouldDisplayAuthenticators && authenticators.authenticators.length > 0 && (
                             <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                                 {authenticators.authenticators.length > 1 && (
-                                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "12px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0, textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0, textTransform: "uppercase", letterSpacing: "0.08em" }}>
                                         {msg("webauthn-available-authenticators")}
                                     </p>
                                 )}
@@ -62,11 +62,11 @@ export default function WebauthnAuthenticate(
                                             gap: "4px",
                                         }}
                                     >
-                                        <div id={`kc-webauthn-authenticator-label-${i}`} style={{ color: "#ffffff", fontSize: "14px", fontWeight: 500, fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                                        <div id={`kc-webauthn-authenticator-label-${i}`} style={{ color: "#ffffff", fontSize: "15px", fontWeight: 500, fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
                                             {advancedMsg(authenticator.label)}
                                         </div>
                                         {authenticator.transports.displayNameProperties?.length ? (
-                                            <div id={`kc-webauthn-authenticator-transport-${i}`} style={{ color: "rgba(255,255,255,0.45)", fontSize: "12px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                                            <div id={`kc-webauthn-authenticator-transport-${i}`} style={{ color: "rgba(255,255,255,0.45)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
                                                 {authenticator.transports.displayNameProperties
                                                     .map((prop, j, arr) => ({ prop, hasNext: j !== arr.length - 1 }))
                                                     .map(({ prop, hasNext }) => (
@@ -77,7 +77,7 @@ export default function WebauthnAuthenticate(
                                                     ))}
                                             </div>
                                         ) : null}
-                                        <div style={{ color: "rgba(255,255,255,0.3)", fontSize: "11px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                                        <div style={{ color: "rgba(255,255,255,0.3)", fontSize: "12px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
                                             <span id={`kc-webauthn-authenticator-createdlabel-${i}`}>{msg("webauthn-createdAt-label")}</span>
                                             <span id={`kc-webauthn-authenticator-created-${i}`}>{authenticator.createdAt}</span>
                                         </div>
@@ -100,7 +100,7 @@ export default function WebauthnAuthenticate(
                         color: "#ffffff",
                         border: "none",
                         borderRadius: "6px",
-                        fontSize: "14px",
+                        fontSize: "15px",
                         fontWeight: 600,
                         fontFamily: "'Geist', 'Open Sans', sans-serif",
                         cursor: "pointer",
@@ -108,7 +108,7 @@ export default function WebauthnAuthenticate(
                 />
 
                 {realm.registrationAllowed && !registrationDisabled && (
-                    <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                    <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
                         {msg("noAccount")}{" "}
                         <a tabIndex={6} href={url.registrationUrl} style={{ color: "#6366F1", textDecoration: "none" }}>
                             {msg("doRegister")}
