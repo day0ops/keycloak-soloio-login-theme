@@ -1,3 +1,5 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMobileScreen } from "@fortawesome/free-solid-svg-icons";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
@@ -9,7 +11,7 @@ const inputStyle: React.CSSProperties = {
     border: "1px solid #34343B",
     borderRadius: "6px",
     color: "#ffffff",
-    fontSize: "14px",
+    fontSize: "15px",
     fontFamily: "'Geist', 'Open Sans', sans-serif",
     outline: "none",
     boxSizing: "border-box",
@@ -20,10 +22,20 @@ const inputStyle: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
     display: "block",
     color: "rgba(255,255,255,0.7)",
-    fontSize: "13px",
+    fontSize: "14px",
     marginBottom: "6px",
     fontFamily: "'Geist', 'Open Sans', sans-serif",
 };
+
+const iconStyle = {
+    position: "absolute",
+    left: "14px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    color: "rgba(255,255,255,0.35)",
+    fontSize: "14px",
+    pointerEvents: "none",
+} as const satisfies React.CSSProperties;
 
 export default function LoginOauth2DeviceVerifyUserCode(
     props: PageProps<Extract<KcContext, { pageId: "login-oauth2-device-verify-user-code.ftl" }>, I18n>
@@ -49,14 +61,17 @@ export default function LoginOauth2DeviceVerifyUserCode(
                     <label htmlFor="device-user-code" style={labelStyle}>
                         {msg("verifyOAuth2DeviceUserCode")}
                     </label>
-                    <input
-                        id="device-user-code"
-                        name="device_user_code"
-                        type="text"
-                        autoComplete="off"
-                        autoFocus
-                        style={inputStyle}
-                    />
+                    <div style={{ position: "relative" }}>
+                        <FontAwesomeIcon icon={faMobileScreen} style={iconStyle} />
+                        <input
+                            id="device-user-code"
+                            name="device_user_code"
+                            type="text"
+                            autoComplete="off"
+                            autoFocus
+                            style={{ ...inputStyle, paddingLeft: "40px" }}
+                        />
+                    </div>
                 </div>
 
                 <button
@@ -68,7 +83,7 @@ export default function LoginOauth2DeviceVerifyUserCode(
                         color: "#ffffff",
                         border: "none",
                         borderRadius: "6px",
-                        fontSize: "14px",
+                        fontSize: "15px",
                         fontWeight: 600,
                         fontFamily: "'Geist', 'Open Sans', sans-serif",
                         cursor: "pointer",
