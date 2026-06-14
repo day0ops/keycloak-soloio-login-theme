@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
@@ -11,7 +13,7 @@ const inputStyle: React.CSSProperties = {
     border: "1px solid #34343B",
     borderRadius: "6px",
     color: "#ffffff",
-    fontSize: "14px",
+    fontSize: "15px",
     fontFamily: "'Geist', 'Open Sans', sans-serif",
     outline: "none",
     boxSizing: "border-box",
@@ -20,10 +22,20 @@ const inputStyle: React.CSSProperties = {
 const labelStyle: React.CSSProperties = {
     display: "block",
     color: "rgba(255,255,255,0.7)",
-    fontSize: "13px",
+    fontSize: "14px",
     marginBottom: "6px",
     fontFamily: "'Geist', 'Open Sans', sans-serif",
 };
+
+const iconStyle = {
+    position: "absolute",
+    left: "14px",
+    top: "50%",
+    transform: "translateY(-50%)",
+    color: "rgba(255,255,255,0.35)",
+    fontSize: "14px",
+    pointerEvents: "none",
+} as const satisfies React.CSSProperties;
 
 export default function LoginUsername(
     props: PageProps<Extract<KcContext, { pageId: "login-username.ftl" }>, I18n>
@@ -65,20 +77,23 @@ export default function LoginUsername(
                                       ? msg("usernameOrEmail")
                                       : msg("email")}
                             </label>
-                            <input
-                                tabIndex={2}
-                                id="username"
-                                name="username"
-                                defaultValue={login.username ?? ""}
-                                type="text"
-                                autoFocus
-                                autoComplete={enableWebAuthnConditionalUI ? "username webauthn" : "username"}
-                                aria-invalid={hasError}
-                                style={hasError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)" } : inputStyle}
-                            />
+                            <div style={{ position: "relative" }}>
+                                <FontAwesomeIcon icon={faUser} style={iconStyle} />
+                                <input
+                                    tabIndex={2}
+                                    id="username"
+                                    name="username"
+                                    defaultValue={login.username ?? ""}
+                                    type="text"
+                                    autoFocus
+                                    autoComplete={enableWebAuthnConditionalUI ? "username webauthn" : "username"}
+                                    aria-invalid={hasError}
+                                    style={hasError ? { ...inputStyle, border: "1px solid rgba(220,53,69,0.6)", paddingLeft: "40px" } : { ...inputStyle, paddingLeft: "40px" }}
+                                />
+                            </div>
                             {hasError && (
                                 <span
-                                    style={{ color: "#ff6b7a", fontSize: "12px", marginTop: "4px", display: "block" }}
+                                    style={{ color: "#ff6b7a", fontSize: "13px", marginTop: "4px", display: "block" }}
                                     aria-live="polite"
                                 >
                                     {messagesPerField.getFirstError("username")}
@@ -88,7 +103,7 @@ export default function LoginUsername(
                     )}
 
                     {realm.rememberMe && !usernameHidden && (
-                        <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.6)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", cursor: "pointer" }}>
+                        <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.6)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", cursor: "pointer" }}>
                             <input
                                 tabIndex={3}
                                 id="rememberMe"
@@ -112,7 +127,7 @@ export default function LoginUsername(
                             color: "#ffffff",
                             border: "none",
                             borderRadius: "6px",
-                            fontSize: "14px",
+                            fontSize: "15px",
                             fontWeight: 600,
                             fontFamily: "'Geist', 'Open Sans', sans-serif",
                             cursor: isLoginButtonDisabled ? "not-allowed" : "pointer",
@@ -123,7 +138,7 @@ export default function LoginUsername(
                     </button>
 
                     {realm.password && realm.registrationAllowed && !registrationDisabled && (
-                        <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                        <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
                             {msg("noAccount")}{" "}
                             <a tabIndex={6} href={url.registrationUrl} style={{ color: "#6366F1", textDecoration: "none" }}>
                                 {msg("doRegister")}
@@ -137,7 +152,7 @@ export default function LoginUsername(
                 <div style={{ marginTop: "24px" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
                         <div style={{ flex: 1, height: "1px", backgroundColor: "rgba(52,52,59,0.6)" }} />
-                        <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "12px", fontFamily: "'Geist', 'Open Sans', sans-serif", whiteSpace: "nowrap" }}>
+                        <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", whiteSpace: "nowrap" }}>
                             {msg("identity-provider-login-label")}
                         </span>
                         <div style={{ flex: 1, height: "1px", backgroundColor: "rgba(52,52,59,0.6)" }} />
@@ -158,7 +173,7 @@ export default function LoginUsername(
                                     border: "1px solid #34343B",
                                     borderRadius: "6px",
                                     color: "#ffffff",
-                                    fontSize: "14px",
+                                    fontSize: "15px",
                                     fontFamily: "'Geist', 'Open Sans', sans-serif",
                                     textDecoration: "none",
                                 }}
@@ -199,7 +214,7 @@ export default function LoginUsername(
                             color: "rgba(255,255,255,0.6)",
                             border: "1px solid rgba(255,255,255,0.15)",
                             borderRadius: "6px",
-                            fontSize: "14px",
+                            fontSize: "15px",
                             fontFamily: "'Geist', 'Open Sans', sans-serif",
                             cursor: "pointer",
                         }}
