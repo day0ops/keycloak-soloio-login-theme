@@ -1,4 +1,4 @@
-ARG KEYCLOAK_VERSION=26.6.3
+ARG KEYCLOAK_VERSION=26.7.0
 
 # Stage 1: Builder
 FROM node:24-alpine AS builder
