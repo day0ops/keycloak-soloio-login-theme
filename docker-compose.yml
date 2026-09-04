@@ -4,7 +4,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        KEYCLOAK_VERSION: ${KEYCLOAK_VERSION:-26.7.0}
+        KEYCLOAK_VERSION: ${KEYCLOAK_VERSION:-26.7.3}
     image: keycloak-custom:local
     ports:
       - "8080:8080"

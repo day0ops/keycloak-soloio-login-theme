@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
     inputs:
       keycloak_version:
-        description: 'Keycloak version (e.g. 26.7.0)'
+        description: 'Keycloak version (e.g. 26.7.3)'
         required: true
-        default: '26.7.0'
+        default: '26.7.3'
       push_image:
         description: 'Push image to registry'
         type: boolean

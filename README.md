@@ -52,7 +52,7 @@ bun run build-keycloak-theme
 docker compose build
 
 # Build with a specific Keycloak version
-KEYCLOAK_VERSION=26.7.0 docker compose build
+KEYCLOAK_VERSION=26.7.3 docker compose build
 
 # Run locally
 docker compose up
@@ -67,8 +67,8 @@ The theme is auto-activated for all realms via `KC_SPI_THEME_DEFAULT_LOGIN_THEME
 Releases are tag-driven. Push a `v{KEYCLOAK_VERSION}` tag:
 
 ```bash
-git tag v26.7.0
-git push origin v26.7.0
+git tag v26.7.3
+git push origin v26.7.3
 ```
 
 This triggers the [release workflow](.github/workflows/release.yml) which:
@@ -81,7 +81,7 @@ This triggers the [release workflow](.github/workflows/release.yml) which:
 ### Image
 
 ```
-australia-southeast1-docker.pkg.dev/field-engineering-apac/kasunt/keycloak:26.7.0
+australia-southeast1-docker.pkg.dev/field-engineering-apac/kasunt/keycloak:26.7.3
 australia-southeast1-docker.pkg.dev/field-engineering-apac/kasunt/keycloak:latest
 ```
 
