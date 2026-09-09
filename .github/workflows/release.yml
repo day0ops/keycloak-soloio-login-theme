@@ -113,6 +113,7 @@ jobs:
             gh release edit "${{ github.ref_name }}" \
               --title "Keycloak ${{ env.KEYCLOAK_VERSION }}" \
               --notes "${NOTES}" \
+              --draft=false \
               --latest
           else
             gh release create "${{ github.ref_name }}" \
