@@ -19,7 +19,7 @@ export default function Code(props: PageProps<Extract<KcContext, { pageId: "code
             <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
                 {code.success ? (
                     <>
-                        <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "15px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
+                        <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "15px", fontFamily: "'DM Sans', 'Open Sans', sans-serif", margin: 0 }}>
                             {msg("copyCodeInstruction")}
                         </p>
                         <input
@@ -29,12 +29,12 @@ export default function Code(props: PageProps<Extract<KcContext, { pageId: "code
                             style={{
                                 width: "100%",
                                 padding: "10px 14px",
-                                backgroundColor: "#27242E",
-                                border: "1px solid #34343B",
+                                backgroundColor: "#27243D",
+                                border: "1px solid #4F556B",
                                 borderRadius: "6px",
                                 color: "#ffffff",
                                 fontSize: "15px",
-                                fontFamily: "'Geist', 'Open Sans', sans-serif",
+                                fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                                 outline: "none",
                                 boxSizing: "border-box",
                                 letterSpacing: "0.1em",
@@ -44,7 +44,7 @@ export default function Code(props: PageProps<Extract<KcContext, { pageId: "code
                 ) : (
                     code.error && (
                         <p
-                            style={{ color: "#ff6b7a", fontSize: "15px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}
+                            style={{ color: "#ff6b7a", fontSize: "15px", fontFamily: "'DM Sans', 'Open Sans', sans-serif", margin: 0 }}
                             dangerouslySetInnerHTML={{ __html: kcSanitize(code.error) }}
                         />
                     )

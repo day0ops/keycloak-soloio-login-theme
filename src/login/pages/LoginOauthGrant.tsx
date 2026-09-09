@@ -18,7 +18,7 @@ export default function LoginOauthGrant(
             doUseDefaultCss={false}
             classes={classes}
             headerNode={
-                <span style={{ fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                <span style={{ fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
                     {client.name ? msg("oauthGrantTitle", advancedMsgStr(client.name)) : msg("oauthGrantTitle", client.clientId)}
                 </span>
             }
@@ -29,7 +29,7 @@ export default function LoginOauthGrant(
                 )}
 
                 <div>
-                    <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: "0 0 10px" }}>
+                    <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", fontFamily: "'DM Sans', 'Open Sans', sans-serif", margin: "0 0 10px" }}>
                         {msg("oauthGrantRequest")}
                     </p>
                     <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "6px" }}>
@@ -42,7 +42,7 @@ export default function LoginOauthGrant(
                                     gap: "8px",
                                     color: "rgba(255,255,255,0.8)",
                                     fontSize: "16px",
-                                    fontFamily: "'Geist', 'Open Sans', sans-serif",
+                                    fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                                     padding: "8px 12px",
                                     backgroundColor: "rgba(255,255,255,0.04)",
                                     borderRadius: "4px",
@@ -61,12 +61,12 @@ export default function LoginOauthGrant(
                 </div>
 
                 {(client.attributes.policyUri || client.attributes.tosUri) && (
-                    <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
+                    <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "13px", fontFamily: "'DM Sans', 'Open Sans', sans-serif", margin: 0 }}>
                         {client.name ? msg("oauthGrantInformation", advancedMsgStr(client.name)) : msg("oauthGrantInformation", client.clientId)}
                         {client.attributes.tosUri && (
                             <>
                                 {" "}{msg("oauthGrantReview")}{" "}
-                                <a href={client.attributes.tosUri} target="_blank" style={{ color: "#6366F1", textDecoration: "none" }}>
+                                <a href={client.attributes.tosUri} target="_blank" style={{ color: "#B082FB", textDecoration: "none" }}>
                                     {msg("oauthGrantTos")}
                                 </a>
                             </>
@@ -74,7 +74,7 @@ export default function LoginOauthGrant(
                         {client.attributes.policyUri && (
                             <>
                                 {" "}{msg("oauthGrantReview")}{" "}
-                                <a href={client.attributes.policyUri} target="_blank" style={{ color: "#6366F1", textDecoration: "none" }}>
+                                <a href={client.attributes.policyUri} target="_blank" style={{ color: "#B082FB", textDecoration: "none" }}>
                                     {msg("oauthGrantPolicy")}
                                 </a>
                             </>
@@ -90,13 +90,13 @@ export default function LoginOauthGrant(
                         style={{
                             width: "100%",
                             padding: "11px",
-                            background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                            background: "linear-gradient(117deg, #7B33EA -23.54%, #12012A 223.49%)",
                             color: "#ffffff",
                             border: "none",
                             borderRadius: "6px",
                             fontSize: "15px",
                             fontWeight: 600,
-                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                             cursor: "pointer",
                         }}
                     >
@@ -114,7 +114,7 @@ export default function LoginOauthGrant(
                             borderRadius: "6px",
                             fontSize: "15px",
                             fontWeight: 500,
-                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                             cursor: "pointer",
                         }}
                     >

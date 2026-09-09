@@ -8,12 +8,12 @@ import type { I18n } from "../i18n";
 const inputStyle: React.CSSProperties = {
     width: "100%",
     padding: "10px 14px",
-    backgroundColor: "#27242E",
-    border: "1px solid #34343B",
+    backgroundColor: "#27243D",
+    border: "1px solid #4F556B",
     borderRadius: "6px",
     color: "#ffffff",
     fontSize: "17px",
-    fontFamily: "'Geist', 'Open Sans', sans-serif",
+    fontFamily: "'DM Sans', 'Open Sans', sans-serif",
     outline: "none",
     boxSizing: "border-box",
 };
@@ -22,8 +22,8 @@ const labelStyle: React.CSSProperties = {
     display: "block",
     color: "rgba(255,255,255,0.7)",
     fontSize: "16px",
-    marginBottom: "6px",
-    fontFamily: "'Geist', 'Open Sans', sans-serif",
+    marginBottom: "8px",
+    fontFamily: "'DM Sans', 'Open Sans', sans-serif",
 };
 
 const iconStyle = {
@@ -53,7 +53,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
             <form
                 action={url.loginAction}
                 method="post"
-                style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+                style={{ display: "flex", flexDirection: "column", gap: "24px" }}
             >
                 <div>
                     <label htmlFor="username" style={labelStyle}>
@@ -87,7 +87,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                     )}
                 </div>
 
-                <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "16px", margin: 0, fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                <p style={{ color: "rgba(255,255,255,0.45)", fontSize: "16px", margin: 0, fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
                     {realm.duplicateEmailsAllowed ? msg("emailInstructionUsername") : msg("emailInstruction")}
                 </p>
 
@@ -96,13 +96,13 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                     style={{
                         width: "100%",
                         padding: "11px",
-                        background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                        background: "linear-gradient(117deg, #7B33EA -23.54%, #12012A 223.49%)",
                         color: "#ffffff",
                         border: "none",
                         borderRadius: "6px",
                         fontSize: "17px",
                         fontWeight: 600,
-                        fontFamily: "'Geist', 'Open Sans', sans-serif",
+                        fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                         cursor: "pointer",
                         marginTop: "4px",
                     }}
@@ -110,8 +110,8 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                     {msgStr("doSubmit")}
                 </button>
 
-                <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
-                    <a href={url.loginUrl} style={{ color: "#6366F1", textDecoration: "none" }}>
+                <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "14px", fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
+                    <a href={url.loginUrl} style={{ color: "#B082FB", textDecoration: "none" }}>
                         {msg("backToLogin")}
                     </a>
                 </p>

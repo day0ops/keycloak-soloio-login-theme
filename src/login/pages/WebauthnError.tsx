@@ -38,13 +38,13 @@ export default function WebauthnError(props: PageProps<Extract<KcContext, { page
                     style={{
                         width: "100%",
                         padding: "11px",
-                        background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                        background: "linear-gradient(117deg, #7B33EA -23.54%, #12012A 223.49%)",
                         color: "#ffffff",
                         border: "none",
                         borderRadius: "6px",
                         fontSize: "15px",
                         fontWeight: 600,
-                        fontFamily: "'Geist', 'Open Sans', sans-serif",
+                        fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                         cursor: "pointer",
                     }}
                 />
@@ -64,7 +64,7 @@ export default function WebauthnError(props: PageProps<Extract<KcContext, { page
                                 borderRadius: "6px",
                                 fontSize: "15px",
                                 fontWeight: 500,
-                                fontFamily: "'Geist', 'Open Sans', sans-serif",
+                                fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                                 cursor: "pointer",
                             }}
                         >

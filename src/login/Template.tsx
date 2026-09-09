@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import type { TemplateProps } from "keycloakify/login/TemplateProps";
 import type { KcContext } from "../kc.gen";
 import type { I18n } from "../i18n";
-import backgroundImage from "./assets/background.png";
+import soloLogo from "./assets/solo-logo.png";
 import faviconUrl from "./assets/favicon.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShieldHalved, faCircleExclamation, faCircleCheck, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
@@ -27,16 +27,19 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
 
         const link = document.createElement("link");
         link.rel = "stylesheet";
-        link.href = "https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap";
+        link.href = "https://fonts.googleapis.com/css2?family=Figtree:wght@400..900&family=DM+Sans:wght@400..700&family=DM+Mono:wght@400..500&display=swap";
         document.head.appendChild(link);
 
         const style = document.createElement("style");
         style.textContent = `
             html, body { margin: 0 !important; padding: 0 !important; overflow-x: hidden !important; }
-            *, *::before, *::after { font-family: 'Geist', 'Open Sans', sans-serif !important; box-sizing: border-box !important; }
+            *, *::before, *::after { font-family: 'DM Sans', 'Open Sans', sans-serif !important; box-sizing: border-box !important; }
+            h1 { font-family: 'Figtree', 'DM Sans', sans-serif !important; }
+            .kc-brand-footer { font-family: 'DM Mono', monospace !important; }
+            #kc-recovery-codes-list li { font-family: 'DM Mono', 'Courier New', monospace !important; }
             input[type="text"], input[type="email"], input[type="password"], input[type="tel"], input[type="number"] {
-                background: #27242E !important;
-                border: 1px solid #34343B !important;
+                background: #27243D !important;
+                border: 1px solid #4F556B !important;
                 color: #ffffff !important;
                 border-radius: 6px !important;
                 padding: 10px 14px !important;
@@ -55,11 +58,11 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 -webkit-text-fill-color: #ffffff !important;
                 transition: background-color 5000s ease-in-out 0s;
             }
-            label { color: rgba(255,255,255,0.7) !important; font-size: 16px !important; margin-bottom: 6px !important; }
-            div[class*="LabelWrapper"] { display: flex !important; flex-direction: row !important; align-items: center !important; gap: 4px !important; margin-bottom: 6px !important; }
+            label { color: rgba(255,255,255,0.7) !important; font-size: 16px !important; margin-bottom: 8px !important; }
+            div[class*="LabelWrapper"] { display: flex !important; flex-direction: row !important; align-items: center !important; gap: 4px !important; margin-bottom: 8px !important; }
             div[class*="LabelWrapper"] label { margin-bottom: 0 !important; display: inline !important; }
-            .kc-form-group { margin-bottom: 16px; }
-            .kc-label-wrapper { display: flex; flex-direction: row; align-items: center; gap: 4px; margin-bottom: 6px; }
+            .kc-form-group { margin-bottom: 24px; }
+            .kc-label-wrapper { display: flex; flex-direction: row; align-items: center; gap: 4px; margin-bottom: 8px; }
             .kc-label-wrapper .kc-label { color: rgba(255,255,255,0.7); font-size: 16px; margin-bottom: 0; display: inline; }
             .kc-input-wrapper { width: 100%; }
             .kc-input-error { color: #ff6b7a !important; font-size: 15px !important; margin-top: 4px !important; display: block !important; }
@@ -75,8 +78,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
             input[type="submit"], button[type="submit"], button.btn-primary, .btn-primary {
                 -webkit-appearance: none !important;
                 appearance: none !important;
-                background: linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%) !important;
-                background-color: #6844FF !important;
+                background: linear-gradient(117deg, #7B33EA -23.54%, #12012A 223.49%) !important;
+                background-color: #7B33EA !important;
                 color: #ffffff !important;
                 border: none !important;
                 border-radius: 6px !important;
@@ -87,8 +90,8 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                 width: 100% !important;
                 margin-top: 8px !important;
             }
-            a { color: #6366F1 !important; }
-            a:hover { color: #818CF8 !important; }
+            a { color: #B082FB !important; }
+            a:hover { color: #FBF7FF !important; }
             .kcInputErrorMessageClass, span[aria-live] { color: #ff6b7a !important; font-size: 15px !important; margin-top: 4px !important; display: block !important; }
         `;
         document.head.appendChild(style);
@@ -102,15 +105,32 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
         }}>
             <div style={{
                 flex: "0 0 60%",
-                backgroundImage: `url(${backgroundImage})`,
-                backgroundSize: "cover",
-                backgroundPosition: "left center",
-                backgroundRepeat: "no-repeat",
-            }} />
+                position: "relative",
+                overflow: "hidden",
+                backgroundImage: `
+                    repeating-radial-gradient(circle at 180% 50%, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 48px),
+                    radial-gradient(circle at 180% 50%, #7B33EA 0%, #3A1470 40%, #12012A 78%)
+                `,
+            }}>
+                <img
+                    src={soloLogo}
+                    alt="Solo.io"
+                    style={{ position: "absolute", top: "48px", left: "48px", height: "28px" }}
+                />
+                <span className="kc-brand-footer" style={{
+                    position: "absolute",
+                    bottom: "40px",
+                    left: "48px",
+                    color: "rgba(255,255,255,0.5)",
+                    fontSize: "12px",
+                }}>
+                    Solo.io, Inc.
+                </span>
+            </div>
             <div style={{
                 flex: "0 0 40%",
                 minHeight: "100vh",
-                backgroundColor: "rgba(17, 19, 27, 0.96)",
+                backgroundColor: "rgba(19, 15, 27, 0.96)",
                 backdropFilter: "blur(12px)",
                 display: "flex",
                 flexDirection: "column",
@@ -124,19 +144,19 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                         fontSize: "26px",
                         fontWeight: 600,
                         margin: 0,
-                        fontFamily: "'Geist', 'Open Sans', sans-serif",
+                        fontFamily: "'Figtree', 'DM Sans', sans-serif",
                         display: "flex",
                         alignItems: "center",
                         gap: "10px",
                     }}>
-                        <FontAwesomeIcon icon={faShieldHalved} style={{ color: "#6844FF", fontSize: "22px", flexShrink: 0 }} />
+                        <FontAwesomeIcon icon={faShieldHalved} style={{ color: "#7B33EA", fontSize: "22px", flexShrink: 0 }} />
                         {kcContext.realm.displayName ?? kcContext.realm.name}
                     </h1>
                     <p style={{
                         color: "rgba(255,255,255,0.5)",
                         fontSize: "16px",
                         margin: "6px 0 0",
-                        fontFamily: "'Geist', 'Open Sans', sans-serif",
+                        fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                     }}>
                         Sign in to continue
                     </p>
@@ -159,7 +179,7 @@ export default function Template(props: TemplateProps<KcContext, I18n>) {
                             borderRadius: "6px",
                             marginBottom: "20px",
                             fontSize: "15px",
-                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                             display: "flex",
                             alignItems: "flex-start",
                             gap: "10px",
