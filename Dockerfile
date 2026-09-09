@@ -15,7 +15,10 @@ COPY . .
 
 RUN npm run build-keycloak-theme
 
+RUN cd spi/downscope-role-enforcer && mvn -q package
+
 # Stage 2: Keycloak with custom theme
 FROM quay.io/keycloak/keycloak:${KEYCLOAK_VERSION}
 
 COPY --from=builder /app/dist_keycloak/*.jar /opt/keycloak/providers/
+COPY --from=builder /app/spi/downscope-role-enforcer/target/downscope-role-enforcer-1.0.0.jar /opt/keycloak/providers/
