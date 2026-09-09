@@ -17,7 +17,7 @@ export default function LinkIdpAction(props: PageProps<Extract<KcContext, { page
             headerNode={msg("linkIdpActionTitle", idpDisplayName)}
         >
             <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
-                <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "15px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
+                <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "15px", fontFamily: "'DM Sans', 'Open Sans', sans-serif", margin: 0 }}>
                     {msg("linkIdpActionMessage", idpDisplayName)}
                 </p>
                 <form action={url.loginAction} method="post" style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
@@ -27,13 +27,13 @@ export default function LinkIdpAction(props: PageProps<Extract<KcContext, { page
                         style={{
                             width: "100%",
                             padding: "11px",
-                            background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                            background: "linear-gradient(117deg, #7B33EA -23.54%, #12012A 223.49%)",
                             color: "#ffffff",
                             border: "none",
                             borderRadius: "6px",
                             fontSize: "15px",
                             fontWeight: 600,
-                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                             cursor: "pointer",
                         }}
                     >
@@ -52,7 +52,7 @@ export default function LinkIdpAction(props: PageProps<Extract<KcContext, { page
                             borderRadius: "6px",
                             fontSize: "15px",
                             fontWeight: 500,
-                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                             cursor: "pointer",
                         }}
                     >

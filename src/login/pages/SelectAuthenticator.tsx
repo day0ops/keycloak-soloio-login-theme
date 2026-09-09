@@ -37,8 +37,8 @@ export default function SelectAuthenticator(
                             alignItems: "center",
                             justifyContent: "space-between",
                             padding: "14px 16px",
-                            backgroundColor: "#27242E",
-                            border: "1px solid #34343B",
+                            backgroundColor: "#27243D",
+                            border: "1px solid #4F556B",
                             borderRadius: "8px",
                             cursor: "pointer",
                             textAlign: "left",
@@ -47,10 +47,10 @@ export default function SelectAuthenticator(
                         }}
                     >
                         <div>
-                            <div style={{ color: "#ffffff", fontSize: "15px", fontWeight: 500, fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                            <div style={{ color: "#ffffff", fontSize: "15px", fontWeight: 500, fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
                                 {advancedMsg(sel.displayName)}
                             </div>
-                            <div style={{ color: "rgba(255,255,255,0.45)", fontSize: "13px", marginTop: "3px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                            <div style={{ color: "rgba(255,255,255,0.45)", fontSize: "13px", marginTop: "3px", fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
                                 {advancedMsg(sel.helpText)}
                             </div>
                         </div>

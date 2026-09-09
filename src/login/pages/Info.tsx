@@ -4,10 +4,10 @@ import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 
 const linkStyle: React.CSSProperties = {
-    color: "#6366F1",
+    color: "#B082FB",
     textDecoration: "none",
     fontSize: "15px",
-    fontFamily: "'Geist', 'Open Sans', sans-serif",
+    fontFamily: "'DM Sans', 'Open Sans', sans-serif",
 };
 
 export default function Info(props: PageProps<Extract<KcContext, { pageId: "info.ftl" }>, I18n>) {
@@ -35,7 +35,7 @@ export default function Info(props: PageProps<Extract<KcContext, { pageId: "info
                     style={{
                         color: "rgba(255,255,255,0.7)",
                         fontSize: "15px",
-                        fontFamily: "'Geist', 'Open Sans', sans-serif",
+                        fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                         margin: 0,
                         lineHeight: 1.6,
                     }}

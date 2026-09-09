@@ -30,10 +30,10 @@ export default function LoginRecoveryAuthnCodeConfig(
                     border: "1px solid rgba(255,193,7,0.3)",
                     borderRadius: "6px",
                 }}>
-                    <p style={{ color: "#ffd966", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: "0 0 4px", fontWeight: 600 }}>
+                    <p style={{ color: "#ffd966", fontSize: "14px", fontFamily: "'DM Sans', 'Open Sans', sans-serif", margin: "0 0 4px", fontWeight: 600 }}>
                         {msg("recovery-code-config-warning-title")}
                     </p>
-                    <p style={{ color: "rgba(255,217,102,0.8)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0 }}>
+                    <p style={{ color: "rgba(255,217,102,0.8)", fontSize: "13px", fontFamily: "'DM Sans', 'Open Sans', sans-serif", margin: 0 }}>
                         {msg("recovery-code-config-warning-message")}
                     </p>
                 </div>
@@ -45,8 +45,8 @@ export default function LoginRecoveryAuthnCodeConfig(
                         listStyle: "none",
                         padding: "16px",
                         margin: 0,
-                        backgroundColor: "#27242E",
-                        border: "1px solid #34343B",
+                        backgroundColor: "#27243D",
+                        border: "1px solid #4F556B",
                         borderRadius: "6px",
                         display: "flex",
                         flexDirection: "column",
@@ -54,7 +54,7 @@ export default function LoginRecoveryAuthnCodeConfig(
                     }}
                 >
                     {recoveryAuthnCodesConfigBean.generatedRecoveryAuthnCodesList.map((code, index) => (
-                        <li key={index} style={{ color: "#ffffff", fontSize: "15px", fontFamily: "'Geist Mono', 'Courier New', monospace", display: "flex", gap: "12px" }}>
+                        <li key={index} style={{ color: "#ffffff", fontSize: "15px", fontFamily: "'DM Mono', 'Courier New', monospace", display: "flex", gap: "12px" }}>
                             <span style={{ color: "rgba(255,255,255,0.3)", minWidth: "20px" }}>{index + 1}.</span>
                             <span style={{ letterSpacing: "0.1em" }}>{code.slice(0, 4)}-{code.slice(4, 8)}-{code.slice(8)}</span>
                         </li>
@@ -76,11 +76,11 @@ export default function LoginRecoveryAuthnCodeConfig(
                                 flex: 1,
                                 padding: "8px 10px",
                                 background: "transparent",
-                                color: "#6366F1",
-                                border: "1px solid rgba(99,102,241,0.3)",
+                                color: "#B082FB",
+                                border: "1px solid rgba(176,130,251,0.3)",
                                 borderRadius: "6px",
                                 fontSize: "13px",
-                                fontFamily: "'Geist', 'Open Sans', sans-serif",
+                                fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                                 cursor: "pointer",
                             }}
                         >
@@ -101,7 +101,7 @@ export default function LoginRecoveryAuthnCodeConfig(
                             document.getElementById("saveRecoveryAuthnCodesBtn").disabled = !event.target.checked;
                         }}
                     />
-                    <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                    <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
                         {msg("recovery-codes-confirmation-message")}
                     </span>
                 </label>
@@ -112,7 +112,7 @@ export default function LoginRecoveryAuthnCodeConfig(
                     <input type="hidden" id="userLabel" name="userLabel" value={msgStr("recovery-codes-label-default")} />
 
                     {/* Logout other sessions */}
-                    <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.6)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", cursor: "pointer" }}>
+                    <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.6)", fontSize: "14px", fontFamily: "'DM Sans', 'Open Sans', sans-serif", cursor: "pointer" }}>
                         <input type="checkbox" id="logout-sessions" name="logout-sessions" value="on" defaultChecked={true} />
                         {msg("logoutOtherSessions")}
                     </label>
@@ -124,13 +124,13 @@ export default function LoginRecoveryAuthnCodeConfig(
                         style={{
                             width: "100%",
                             padding: "11px",
-                            background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                            background: "linear-gradient(117deg, #7B33EA -23.54%, #12012A 223.49%)",
                             color: "#ffffff",
                             border: "none",
                             borderRadius: "6px",
                             fontSize: "15px",
                             fontWeight: 600,
-                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                             cursor: "not-allowed",
                             opacity: 0.5,
                         }}
@@ -153,7 +153,7 @@ export default function LoginRecoveryAuthnCodeConfig(
                                 borderRadius: "6px",
                                 fontSize: "15px",
                                 fontWeight: 500,
-                                fontFamily: "'Geist', 'Open Sans', sans-serif",
+                                fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                                 cursor: "pointer",
                             }}
                         >

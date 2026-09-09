@@ -89,13 +89,13 @@ export default function Register(props: RegisterProps) {
                             style={{
                                 width: "100%",
                                 padding: "11px",
-                                background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                                background: "linear-gradient(117deg, #7B33EA -23.54%, #12012A 223.49%)",
                                 color: "#ffffff",
                                 border: "none",
                                 borderRadius: "6px",
                                 fontSize: "17px",
                                 fontWeight: 600,
-                                fontFamily: "'Geist', 'Open Sans', sans-serif",
+                                fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                                 cursor: "pointer",
                             }}
                         >
@@ -108,13 +108,13 @@ export default function Register(props: RegisterProps) {
                             style={{
                                 width: "100%",
                                 padding: "11px",
-                                background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                                background: "linear-gradient(117deg, #7B33EA -23.54%, #12012A 223.49%)",
                                 color: "#ffffff",
                                 border: "none",
                                 borderRadius: "6px",
                                 fontSize: "17px",
                                 fontWeight: 600,
-                                fontFamily: "'Geist', 'Open Sans', sans-serif",
+                                fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                                 cursor: (!isFormSubmittable || (termsAcceptanceRequired && !areTermsAccepted)) ? "not-allowed" : "pointer",
                                 opacity: (!isFormSubmittable || (termsAcceptanceRequired && !areTermsAccepted)) ? 0.5 : 1,
                             }}
@@ -122,8 +122,8 @@ export default function Register(props: RegisterProps) {
                             {msgStr("doRegister")}
                         </button>
                     )}
-                    <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "16px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
-                        <a href={url.loginUrl} style={{ color: "#6366F1", textDecoration: "none" }}>
+                    <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "16px", fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
+                        <a href={url.loginUrl} style={{ color: "#B082FB", textDecoration: "none" }}>
                             {msg("backToLogin")}
                         </a>
                     </p>
@@ -145,19 +145,19 @@ function TermsAcceptance(props: {
     return (
         <div style={{ marginBottom: "16px", display: "flex", flexDirection: "column", gap: "10px" }}>
             <div>
-                <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "16px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: "0 0 6px" }}>
+                <p style={{ color: "rgba(255,255,255,0.7)", fontSize: "16px", fontFamily: "'DM Sans', 'Open Sans', sans-serif", margin: "0 0 6px" }}>
                     {msg("termsTitle")}
                 </p>
                 <div
                     id="kc-registration-terms-text"
                     style={{
                         padding: "10px 14px",
-                        backgroundColor: "#27242E",
-                        border: "1px solid #34343B",
+                        backgroundColor: "#27243D",
+                        border: "1px solid #4F556B",
                         borderRadius: "6px",
                         color: "rgba(255,255,255,0.6)",
                         fontSize: "15px",
-                        fontFamily: "'Geist', 'Open Sans', sans-serif",
+                        fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                         maxHeight: "120px",
                         overflowY: "auto",
                     }}
@@ -175,7 +175,7 @@ function TermsAcceptance(props: {
                     onChange={e => onAreTermsAcceptedValueChange(e.target.checked)}
                     aria-invalid={messagesPerField.existsError("termsAccepted")}
                 />
-                <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "16px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                <span style={{ color: "rgba(255,255,255,0.7)", fontSize: "16px", fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
                     {msg("acceptTerms")}
                 </span>
             </label>

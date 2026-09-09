@@ -12,12 +12,12 @@ const inputStyle: React.CSSProperties = {
     width: "100%",
     padding: "10px 14px 10px 14px",
     paddingRight: "42px",
-    backgroundColor: "#27242E",
-    border: "1px solid #34343B",
+    backgroundColor: "#27243D",
+    border: "1px solid #4F556B",
     borderRadius: "6px",
     color: "#ffffff",
     fontSize: "15px",
-    fontFamily: "'Geist', 'Open Sans', sans-serif",
+    fontFamily: "'DM Sans', 'Open Sans', sans-serif",
     outline: "none",
     boxSizing: "border-box",
 };
@@ -26,8 +26,8 @@ const labelStyle: React.CSSProperties = {
     display: "block",
     color: "rgba(255,255,255,0.7)",
     fontSize: "14px",
-    marginBottom: "6px",
-    fontFamily: "'Geist', 'Open Sans', sans-serif",
+    marginBottom: "8px",
+    fontFamily: "'DM Sans', 'Open Sans', sans-serif",
 };
 
 const iconStyle = {
@@ -122,7 +122,7 @@ export default function LoginPassword(
                 onSubmit={() => { setIsLoginButtonDisabled(true); return true; }}
                 action={url.loginAction}
                 method="post"
-                style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+                style={{ display: "flex", flexDirection: "column", gap: "24px" }}
             >
                 <div>
                     <label htmlFor="password" style={labelStyle}>
@@ -152,7 +152,7 @@ export default function LoginPassword(
 
                 {realm.resetPasswordAllowed && (
                     <p style={{ margin: 0, textAlign: "right" }}>
-                        <a tabIndex={5} href={url.loginResetCredentialsUrl} style={{ color: "#6366F1", fontSize: "14px", textDecoration: "none", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                        <a tabIndex={5} href={url.loginResetCredentialsUrl} style={{ color: "#B082FB", fontSize: "14px", textDecoration: "none", fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
                             {msg("doForgotPassword")}
                         </a>
                     </p>
@@ -166,13 +166,13 @@ export default function LoginPassword(
                     style={{
                         width: "100%",
                         padding: "11px",
-                        background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                        background: "linear-gradient(117deg, #7B33EA -23.54%, #12012A 223.49%)",
                         color: "#ffffff",
                         border: "none",
                         borderRadius: "6px",
                         fontSize: "15px",
                         fontWeight: 600,
-                        fontFamily: "'Geist', 'Open Sans', sans-serif",
+                        fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                         cursor: isLoginButtonDisabled ? "not-allowed" : "pointer",
                         opacity: isLoginButtonDisabled ? 0.6 : 1,
                     }}
@@ -211,7 +211,7 @@ export default function LoginPassword(
                             border: "1px solid rgba(255,255,255,0.15)",
                             borderRadius: "6px",
                             fontSize: "15px",
-                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                             cursor: "pointer",
                         }}
                     />

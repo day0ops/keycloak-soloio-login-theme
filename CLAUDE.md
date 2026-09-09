@@ -43,7 +43,7 @@ All other Keycloak flows fall through to `DefaultPage` from keycloakify with the
 ### Template
 
 `src/login/Template.tsx` is the shared layout. It:
-- Renders the full-page dark glassmorphism panel (420px right-aligned sidebar over `background.png`)
+- Renders the full-page dark glassmorphism panel (right-aligned sidebar over a CSS radial-gradient + concentric-ring backdrop, Solo.io logo top-left)
 - Injects global CSS via `useEffect` (`<style>` tag appended to `document.head`) — no CSS modules or Tailwind
 - Loads Geist font from Google Fonts at runtime
 
@@ -51,13 +51,14 @@ All other Keycloak flows fall through to `DefaultPage` from keycloakify with the
 
 | Token | Value |
 |---|---|
-| Input background | `#27242E` |
-| Input border | `#34343B` |
-| Panel background | `rgba(17, 19, 27, 0.96)` |
-| Primary gradient | `#6844FF` → `#1D283A` (117deg) |
-| Link color | `#6366F1` |
+| Input background | `#27243D` (Dark Purple Gray) |
+| Input border | `#4F556B` (CC Gray) |
+| Panel background | `rgba(19, 15, 27, 0.96)` (CC Dark) |
+| Primary gradient | `#7B33EA` (Purple) → `#12012A` (Dark Purple) (117deg) |
+| Link color | `#B082FB` (Light Purple), hover `#FBF7FF` (Light) |
 | Error color | `#ff6b7a` |
-| Font | Geist (fallback: Open Sans) |
+| Headline font | Figtree (fallback: DM Sans) - `<h1>` only |
+| Body font | DM Sans (fallback: Open Sans) - everything else |
 
 ### Generated files
 

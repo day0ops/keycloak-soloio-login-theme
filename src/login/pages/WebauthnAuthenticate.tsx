@@ -44,7 +44,7 @@ export default function WebauthnAuthenticate(
                         {shouldDisplayAuthenticators && authenticators.authenticators.length > 0 && (
                             <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
                                 {authenticators.authenticators.length > 1 && (
-                                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0, textTransform: "uppercase", letterSpacing: "0.08em" }}>
+                                    <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "13px", fontFamily: "'DM Sans', 'Open Sans', sans-serif", margin: 0, textTransform: "uppercase", letterSpacing: "0.08em" }}>
                                         {msg("webauthn-available-authenticators")}
                                     </p>
                                 )}
@@ -54,19 +54,19 @@ export default function WebauthnAuthenticate(
                                         id={`kc-webauthn-authenticator-item-${i}`}
                                         style={{
                                             padding: "12px 14px",
-                                            backgroundColor: "#27242E",
-                                            border: "1px solid #34343B",
+                                            backgroundColor: "#27243D",
+                                            border: "1px solid #4F556B",
                                             borderRadius: "6px",
                                             display: "flex",
                                             flexDirection: "column",
                                             gap: "4px",
                                         }}
                                     >
-                                        <div id={`kc-webauthn-authenticator-label-${i}`} style={{ color: "#ffffff", fontSize: "15px", fontWeight: 500, fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                                        <div id={`kc-webauthn-authenticator-label-${i}`} style={{ color: "#ffffff", fontSize: "15px", fontWeight: 500, fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
                                             {advancedMsg(authenticator.label)}
                                         </div>
                                         {authenticator.transports.displayNameProperties?.length ? (
-                                            <div id={`kc-webauthn-authenticator-transport-${i}`} style={{ color: "rgba(255,255,255,0.45)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                                            <div id={`kc-webauthn-authenticator-transport-${i}`} style={{ color: "rgba(255,255,255,0.45)", fontSize: "13px", fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
                                                 {authenticator.transports.displayNameProperties
                                                     .map((prop, j, arr) => ({ prop, hasNext: j !== arr.length - 1 }))
                                                     .map(({ prop, hasNext }) => (
@@ -77,7 +77,7 @@ export default function WebauthnAuthenticate(
                                                     ))}
                                             </div>
                                         ) : null}
-                                        <div style={{ color: "rgba(255,255,255,0.3)", fontSize: "12px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                                        <div style={{ color: "rgba(255,255,255,0.3)", fontSize: "12px", fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
                                             <span id={`kc-webauthn-authenticator-createdlabel-${i}`}>{msg("webauthn-createdAt-label")}</span>
                                             <span id={`kc-webauthn-authenticator-created-${i}`}>{authenticator.createdAt}</span>
                                         </div>
@@ -96,21 +96,21 @@ export default function WebauthnAuthenticate(
                     style={{
                         width: "100%",
                         padding: "11px",
-                        background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                        background: "linear-gradient(117deg, #7B33EA -23.54%, #12012A 223.49%)",
                         color: "#ffffff",
                         border: "none",
                         borderRadius: "6px",
                         fontSize: "15px",
                         fontWeight: 600,
-                        fontFamily: "'Geist', 'Open Sans', sans-serif",
+                        fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                         cursor: "pointer",
                     }}
                 />
 
                 {realm.registrationAllowed && !registrationDisabled && (
-                    <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                    <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "14px", fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
                         {msg("noAccount")}{" "}
-                        <a tabIndex={6} href={url.registrationUrl} style={{ color: "#6366F1", textDecoration: "none" }}>
+                        <a tabIndex={6} href={url.registrationUrl} style={{ color: "#B082FB", textDecoration: "none" }}>
                             {msg("doRegister")}
                         </a>
                     </p>

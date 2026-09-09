@@ -9,12 +9,12 @@ import { useScript } from "keycloakify/login/pages/LoginUsername.useScript";
 const inputStyle: React.CSSProperties = {
     width: "100%",
     padding: "10px 14px",
-    backgroundColor: "#27242E",
-    border: "1px solid #34343B",
+    backgroundColor: "#27243D",
+    border: "1px solid #4F556B",
     borderRadius: "6px",
     color: "#ffffff",
     fontSize: "15px",
-    fontFamily: "'Geist', 'Open Sans', sans-serif",
+    fontFamily: "'DM Sans', 'Open Sans', sans-serif",
     outline: "none",
     boxSizing: "border-box",
 };
@@ -23,8 +23,8 @@ const labelStyle: React.CSSProperties = {
     display: "block",
     color: "rgba(255,255,255,0.7)",
     fontSize: "14px",
-    marginBottom: "6px",
-    fontFamily: "'Geist', 'Open Sans', sans-serif",
+    marginBottom: "8px",
+    fontFamily: "'DM Sans', 'Open Sans', sans-serif",
 };
 
 const iconStyle = {
@@ -66,7 +66,7 @@ export default function LoginUsername(
                     onSubmit={() => { setIsLoginButtonDisabled(true); return true; }}
                     action={url.loginAction}
                     method="post"
-                    style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+                    style={{ display: "flex", flexDirection: "column", gap: "24px" }}
                 >
                     {!usernameHidden && (
                         <div>
@@ -104,7 +104,7 @@ export default function LoginUsername(
                     )}
 
                     {realm.rememberMe && !usernameHidden && (
-                        <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.6)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", cursor: "pointer" }}>
+                        <label style={{ display: "flex", alignItems: "center", gap: "8px", color: "rgba(255,255,255,0.6)", fontSize: "14px", fontFamily: "'DM Sans', 'Open Sans', sans-serif", cursor: "pointer" }}>
                             <input
                                 tabIndex={3}
                                 id="rememberMe"
@@ -124,13 +124,13 @@ export default function LoginUsername(
                         style={{
                             width: "100%",
                             padding: "11px",
-                            background: "linear-gradient(117deg, #6844FF -23.54%, #1D283A 223.49%)",
+                            background: "linear-gradient(117deg, #7B33EA -23.54%, #12012A 223.49%)",
                             color: "#ffffff",
                             border: "none",
                             borderRadius: "6px",
                             fontSize: "15px",
                             fontWeight: 600,
-                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                             cursor: isLoginButtonDisabled ? "not-allowed" : "pointer",
                             opacity: isLoginButtonDisabled ? 0.6 : 1,
                         }}
@@ -139,9 +139,9 @@ export default function LoginUsername(
                     </button>
 
                     {realm.password && realm.registrationAllowed && !registrationDisabled && (
-                        <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif" }}>
+                        <p style={{ textAlign: "center", margin: 0, color: "rgba(255,255,255,0.45)", fontSize: "14px", fontFamily: "'DM Sans', 'Open Sans', sans-serif" }}>
                             {msg("noAccount")}{" "}
-                            <a tabIndex={6} href={url.registrationUrl} style={{ color: "#6366F1", textDecoration: "none" }}>
+                            <a tabIndex={6} href={url.registrationUrl} style={{ color: "#B082FB", textDecoration: "none" }}>
                                 {msg("doRegister")}
                             </a>
                         </p>
@@ -153,7 +153,7 @@ export default function LoginUsername(
                 <div style={{ marginTop: "24px" }}>
                     <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
                         <div style={{ flex: 1, height: "1px", backgroundColor: "rgba(52,52,59,0.6)" }} />
-                        <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "13px", fontFamily: "'Geist', 'Open Sans', sans-serif", whiteSpace: "nowrap" }}>
+                        <span style={{ color: "rgba(255,255,255,0.3)", fontSize: "13px", fontFamily: "'DM Sans', 'Open Sans', sans-serif", whiteSpace: "nowrap" }}>
                             {msg("identity-provider-login-label")}
                         </span>
                         <div style={{ flex: 1, height: "1px", backgroundColor: "rgba(52,52,59,0.6)" }} />
@@ -170,12 +170,12 @@ export default function LoginUsername(
                                     justifyContent: "center",
                                     gap: "8px",
                                     padding: "10px 16px",
-                                    backgroundColor: "#27242E",
-                                    border: "1px solid #34343B",
+                                    backgroundColor: "#27243D",
+                                    border: "1px solid #4F556B",
                                     borderRadius: "6px",
                                     color: "#ffffff",
                                     fontSize: "15px",
-                                    fontFamily: "'Geist', 'Open Sans', sans-serif",
+                                    fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                                     textDecoration: "none",
                                 }}
                             >
@@ -216,7 +216,7 @@ export default function LoginUsername(
                             border: "1px solid rgba(255,255,255,0.15)",
                             borderRadius: "6px",
                             fontSize: "15px",
-                            fontFamily: "'Geist', 'Open Sans', sans-serif",
+                            fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                             cursor: "pointer",
                         }}
                     />

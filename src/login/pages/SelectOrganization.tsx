@@ -39,7 +39,7 @@ export default function SelectOrganization(
         <Template kcContext={kcContext} i18n={i18n} doUseDefaultCss={false} classes={classes} headerNode={null}>
             <form ref={formRef} action={url.loginAction} method="post">
                 <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
-                    <h2 style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", fontFamily: "'Geist', 'Open Sans', sans-serif", margin: 0, fontWeight: 400 }}>
+                    <h2 style={{ color: "rgba(255,255,255,0.7)", fontSize: "14px", fontFamily: "'DM Sans', 'Open Sans', sans-serif", margin: 0, fontWeight: 400 }}>
                         {msg("organization.select")}
                     </h2>
                     <div style={{
@@ -57,12 +57,12 @@ export default function SelectOrganization(
                                 disabled={isSubmitting}
                                 style={{
                                     padding: "12px 16px",
-                                    backgroundColor: "#27242E",
-                                    border: "1px solid #34343B",
+                                    backgroundColor: "#27243D",
+                                    border: "1px solid #4F556B",
                                     borderRadius: "6px",
                                     color: "#ffffff",
                                     fontSize: "15px",
-                                    fontFamily: "'Geist', 'Open Sans', sans-serif",
+                                    fontFamily: "'DM Sans', 'Open Sans', sans-serif",
                                     cursor: isSubmitting ? "not-allowed" : "pointer",
                                     opacity: isSubmitting ? 0.6 : 1,
                                     textAlign: "center",
