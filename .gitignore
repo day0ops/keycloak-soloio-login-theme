@@ -46,3 +46,6 @@ _build/
 dist/
 build/
 dist_keycloak/
+
+#### Maven ####
+target/
