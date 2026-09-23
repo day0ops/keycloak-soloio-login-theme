@@ -22,7 +22,7 @@ docker compose build
 docker compose up
 
 # Build with specific Keycloak version
-KEYCLOAK_VERSION=26.7.3 docker compose build
+KEYCLOAK_VERSION=26.7.4 docker compose build
 ```
 
 CI uses `npm` (not bun). Docker build also uses `npm`. Bun is only for local development.
@@ -76,4 +76,4 @@ Stories live alongside pages (`*.stories.tsx`). `KcPageStory` / `createKcPageSto
 
 ## Releases
 
-Tag-driven. Push `v{KEYCLOAK_VERSION}` (e.g. `v26.7.3`) to trigger the release workflow, which builds and pushes to Google Artifact Registry (`australia-southeast1-docker.pkg.dev/field-engineering-apac/kasunt/keycloak`).
+Tag-driven. Push `v{KEYCLOAK_VERSION}` (e.g. `v26.7.4`) to trigger the release workflow, which builds and pushes to Google Artifact Registry (`australia-southeast1-docker.pkg.dev/field-engineering-apac/kasunt/keycloak`).
