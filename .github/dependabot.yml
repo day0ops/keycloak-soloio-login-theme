@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "maven"
+    directory: "/spi/downscope-role-enforcer"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "build"
+    assignees:
+      - "day0ops"
